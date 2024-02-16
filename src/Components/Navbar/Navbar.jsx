@@ -12,8 +12,13 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import { Link } from 'react-router-dom';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+
+
+
+
+const pages = ['Home', 'News', 'Events', 'Entertainment', 'LifeStyle', 'Sports', 'Auto', 'Tech'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
@@ -36,7 +41,7 @@ function Navbar() {
     };
 
     return (
-        <AppBar position="static" >
+        <AppBar sx={{bgcolor: '#AD343E'}} position="static" >
             <Container maxWidth="xl" >
                 <Toolbar disableGutters>
                     <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -44,7 +49,7 @@ function Navbar() {
                         variant="h6"
                         noWrap
                         component="a"
-                        href="#app-bar-with-responsive-menu"
+                        href="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
@@ -88,8 +93,14 @@ function Navbar() {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
+                                <MenuItem key={page} onClick={handleCloseNavMenu} >
+                                    {/* Added link here
+                                     */}
+
+                                    <Typography textAlign="center">
+                                        <Link to={`./${page}`} style={{textDecoration:'none', color:'inherit'}}>{page}</Link>
+                                    </Typography>
+
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -99,7 +110,7 @@ function Navbar() {
                         variant="h5"
                         noWrap
                         component="a"
-                        href="#app-bar-with-responsive-menu"
+                        href="/"
                         sx={{
                             mr: 2,
                             display: { xs: 'flex', md: 'none' },
@@ -111,7 +122,7 @@ function Navbar() {
                             textDecoration: 'none',
                         }}
                     >
-                        LOGO
+                        REACH MEDIA
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         {pages.map((page) => (
@@ -120,7 +131,12 @@ function Navbar() {
                                 onClick={handleCloseNavMenu}
                                 sx={{ my: 2, color: 'white', display: 'block' }}
                             >
-                                {page}
+
+
+                                        <Link to={`./${page}`} style={{textDecoration:'none', color:'inherit'}}>{page}</Link>
+
+
+                                
                             </Button>
                         ))}
                     </Box>
