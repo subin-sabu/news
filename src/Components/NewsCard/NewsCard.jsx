@@ -9,20 +9,20 @@ import { Container } from '@mui/system';
 
 
 
-const createNewsCard = [1, 2, 3, 4, 5, 6, 7, 8]
+const createNewsCard = [1, 2, 3, 4]
 
 
 export default function NewsCard() {
   return (
-    <Container sx={{ marginTop: '2rem'}}>
-      <Grid container  
-      rowSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }} 
-      columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
-      justifyContent='center'>
+    <Container sx={{ marginTop: '2rem' }}>
+      <Grid container
+        rowSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+        columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
+        justifyContent='center'>
 
         {createNewsCard.map((createNewsCard) => (
-          <Grid item key={createNewsCard} xs={12} sm={6} md={4} lg={3} xl={2}  >
-            <Card sx={{ maxWidth: 345, mx:'auto'}}>
+          <Grid item key={createNewsCard} xs={12} sm={6} md={4} lg={3}   >
+            <Card sx={{ maxWidth: 345, mx: 'auto' }}>
               <CardActionArea>
                 <CardMedia
                   component="img"
@@ -31,6 +31,9 @@ export default function NewsCard() {
                   alt="news"
                 />
                 <CardContent>
+                  <Typography gutterBottom variant="caption" color='text.secondary' component="div">
+                    05:25 hours ago
+                  </Typography>
                   <Typography gutterBottom variant="h6" component="div">
                     ആരാണ് മോഴയാനകള്‍? കൊമ്പനോ അതോ പിടിയോ?...
                   </Typography>
@@ -45,5 +48,6 @@ export default function NewsCard() {
 
       </Grid>
     </Container>
+
   );
 }
