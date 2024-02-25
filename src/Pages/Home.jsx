@@ -2,7 +2,7 @@ import React from 'react'
 import NewsCard from '../Components/NewsCard/NewsCard'
 import ImageAd from '../Components/ImageAd/ImageAd'
 import NewsCardXS from '../Components/NewsCard/NewsCardXS'
-import { useMediaQuery, useTheme } from '@mui/material'
+import { Container, useMediaQuery, useTheme } from '@mui/material'
 import MainNews from '../Components/MainNews/MainNews'
 
 function Home() {
@@ -14,9 +14,16 @@ function Home() {
 
   return (
     <div>
+     
 
       <ImageAd />
-      <MainNews/>
+      
+        <MainNews />
+        
+      
+
+      
+
       {matchXS && <NewsCardXS />}
       {aboveXS && <NewsCard />}
 

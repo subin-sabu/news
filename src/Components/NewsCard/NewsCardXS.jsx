@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, Grid } from '@mui/material';
+import { Box, CardActionArea, Grid } from '@mui/material';
 import { Container } from '@mui/system';
 import {cutText} from '../../Utils/cutText'
 
@@ -41,7 +41,7 @@ const newsArray = [
 
 export default function NewsCard() {
   return (
-    <Container sx={{ marginTop: '2rem' }}>
+    <Box sx={{ marginTop: '2rem' }}>
       <Grid container
         rowSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
         columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
@@ -78,7 +78,7 @@ export default function NewsCard() {
         ))}
 
       </Grid>
-    </Container>
+    </Box>
   );
 }
 
