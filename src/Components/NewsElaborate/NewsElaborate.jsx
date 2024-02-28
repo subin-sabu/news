@@ -1,10 +1,10 @@
 import * as React from 'react';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Grid, Paper } from '@mui/material';
 import {Box } from '@mui/system';
 import mainNews from '../Assets/main';
+import VideoContainer from '../iFrame Container/VideoContainer';
 
 
 
@@ -26,12 +26,8 @@ export default function NewsElaborate() {
                   {news.title}
                 </Typography>
               </CardContent>
-              <CardMedia sx={{ width: '100%', maxWidth: '100%' }}
-                component="img"
-                height="auto"
-                image={news.imageURL}
-                alt="news image"
-              />
+              <VideoContainer videoURL={news.videoURL}/>
+
               <CardContent sx={{ height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
                 <Typography gutterBottom variant="caption" color='text.secondary' component="div" >
                   {news.time}
@@ -43,7 +39,7 @@ export default function NewsElaborate() {
               </CardContent>
 
             </Paper>
-          </Grid>
+          </Grid> 
         ))}
 
       </Grid>
