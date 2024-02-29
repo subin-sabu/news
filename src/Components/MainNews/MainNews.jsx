@@ -25,7 +25,7 @@ export default function MainNews() {
               <CardActionArea sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
 
                 <CardContent sx={{ display:'flex', flexDirection:'row' ,textAlign:'center' }}>
-                  <Typography gutterBottom  variant="h5" fontWeight='500' component="div" sx={{ mb: 1 }}>
+                  <Typography  variant="body2" fontWeight='600' component="div" fontSize={17} >
                     {news.title}
                   </Typography>
                 </CardContent>
