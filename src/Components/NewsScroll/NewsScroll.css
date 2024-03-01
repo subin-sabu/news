@@ -1,0 +1,32 @@
+.scroll-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  background: #007bff ;
+  position: sticky;
+  bottom: 0;
+}
+
+.scroll {
+  display: flex;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.scroll span {
+  
+  padding: 0.2rem;
+  margin-left: 1.5rem;
+  color: #faf7f7;
+  
+}

@@ -1,5 +1,4 @@
-// import p1_img from './product_1.png'
-// import p2_img from './product_2.png'
+
 
 
 let newsArray = [{

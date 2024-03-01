@@ -13,6 +13,7 @@ import Auto from './Pages/Auto';
 import Tech from './Pages/Tech';
 import TopNav from './Components/Navbar/TopNav';
 import Footer from './Components/Footer/Footer';
+import NewsScroll from './Components/NewsScroll/NewsScroll';
 
 
 
@@ -34,6 +35,7 @@ function App() {
         <Route path='/Auto' element={<Auto />} />
       </Routes>
       <Footer/>
+    <NewsScroll/>
     </div>
   );
 }
