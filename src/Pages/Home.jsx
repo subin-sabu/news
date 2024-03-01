@@ -5,6 +5,7 @@ import NewsCardXS from '../Components/NewsCard/NewsCardXS'
 import { Container, useMediaQuery, useTheme } from '@mui/material'
 import MainNews from '../Components/MainNews/MainNews'
 import Footer from '../Components/Footer/Footer'
+import NewsCardXSCopy from '../Components/NewsCard/NewsCardXSCopy'
 
 
 function Home() {
@@ -19,8 +20,12 @@ function Home() {
       <Container>
 
         <HomeAd1 />
+        <div style={{ display: 'flex', justifyContent: 'space-between', flexFlow: 'row wrap' }}>
+          <MainNews />
+          <div style={{maxWidth:'600px'}}> <NewsCardXSCopy/></div>
+         
+        </div>
 
-        <MainNews />
 
 
 
@@ -29,9 +34,9 @@ function Home() {
         {matchXS && <NewsCardXS />}
         {aboveXS && <NewsCard />}
 
-        
+
       </Container>
-     
+
 
 
     </div >

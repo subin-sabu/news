@@ -5,6 +5,7 @@ import { Grid, Paper } from '@mui/material';
 import {Box } from '@mui/system';
 import mainNews from '../Assets/main';
 import VideoContainer from '../iFrame Container/VideoContainer';
+import HomeAd1 from '../../Advertisements/HomeAd1';
 
 
 
@@ -33,7 +34,11 @@ export default function NewsElaborate() {
                   {news.time}
                 </Typography>
 
-                <Typography variant="body2" color="text.secondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical' }}>
+                <Typography variant="body2" color="text.secondary" fontWeight={8} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical' }}>
+                  {news.description}
+                </Typography>
+                <HomeAd1/>
+                <Typography variant="body2" color="text.secondary" fontWeight={8} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical' }}>
                   {news.description}
                 </Typography>
               </CardContent>

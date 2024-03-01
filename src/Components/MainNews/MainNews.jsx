@@ -40,7 +40,7 @@ export default function MainNews() {
                     {news.time}
                   </Typography>
                   
-                  <Typography variant="body2" color="text.secondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '5', WebkitBoxOrient: 'vertical' }}>
+                  <Typography variant="body2" color="text.secondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '6', WebkitBoxOrient: 'vertical' }}>
                     {news.description}
                   </Typography>
                 </CardContent>
