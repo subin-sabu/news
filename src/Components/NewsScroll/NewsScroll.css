@@ -3,7 +3,7 @@
   justify-content: center;
   width: 100%;
   overflow: hidden;
-  background: #007bff ;
+  background: #914c03 ;
   position: sticky;
   bottom: 0;
 }
@@ -27,6 +27,6 @@
   
   padding: 0.2rem;
   margin-left: 1.5rem;
-  color: #faf7f7;
-  
+  color: #fafaf8;
+  font-weight: 600;
 }

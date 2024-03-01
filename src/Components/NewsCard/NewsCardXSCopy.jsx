@@ -11,7 +11,7 @@ import newsArray from '../Assets/newsCopy';
 
 export default function NewsCardXSCopy() {
   return (
-    <Box sx={{ marginTop: '2rem', border:'1px solid beige', padding:'4px',borderRadius:'8px'}}>
+    <Box sx={{ marginTop: '2rem', border:'1px solid beige', padding:'4px',borderRadius:'8px', backgroundColor:'#F7F7F7'}}>
       <Grid container
         rowSpacing={{ xs: 1, sm: 2, md: 3, }}
         columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
