@@ -11,13 +11,17 @@ import LifeStyle from './Pages/LifeStyle';
 import Sports from './Pages/Sports';
 import Auto from './Pages/Auto';
 import Tech from './Pages/Tech';
+import TopNav from './Components/Navbar/TopNav';
+import Footer from './Components/Footer/Footer';
 
 
 
 function App() {
   return (
     <div>
+      
       <Navbar />
+      <TopNav/>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='Home' element={<Home/>}/>
@@ -29,6 +33,7 @@ function App() {
         <Route path='/Tech' element={<Tech />} />
         <Route path='/Auto' element={<Auto />} />
       </Routes>
+      <Footer/>
     </div>
   );
 }

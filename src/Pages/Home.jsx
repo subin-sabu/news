@@ -31,7 +31,7 @@ function Home() {
 
         
       </Container>
-      <Footer />
+     
 
 
     </div >

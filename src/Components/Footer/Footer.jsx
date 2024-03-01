@@ -1,15 +1,23 @@
-
 import { Box, Container } from '@mui/material'
 import React from 'react'
-import reach from '../Assets/reach.PNG'
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
 
 function Footer() {
   return (
-    <div style={{background:'#181818'}}>
-      <Container>
-        <img src={reach} style={{maxWidth:'60px'}}/>
-      </Container>
-    </div>
+    <Box style={{ backgroundColor: '#181818', color: 'white' }}>
+      <Container >
+        <div style={{ display: 'flex', justifyContent: 'center', flexFlow: 'row wrap', paddingTop: '2rem' }}>
+          ©2024, Reach Media. All Rights Reserved.
+          <div className="social" style={{ width: '100%', display: 'flex', justifyContent: 'center' , paddingBottom:'1rem'}}>
+            <YouTubeIcon style={{ paddingRight: '.5rem', paddingTop: '.4rem', }} /><FacebookIcon style={{ paddingRight: '.5rem', paddingTop: '.4rem', }} /><InstagramIcon style={{ paddingRight: '.5rem', paddingTop: '.4rem', }} />
+          </div>
+        </div>
+
+      </Container >
+    </Box>
+
   )
 }
 

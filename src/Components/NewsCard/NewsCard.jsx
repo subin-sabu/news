@@ -16,7 +16,7 @@ import { useTheme } from '@emotion/react';
 export default function NewsCard() {
   const theme = useTheme();
   return (
-    <Box sx={{ marginTop: '2rem'}}>
+    <Box sx={{ marginTop: '2rem', marginBottom:'2rem'}}>
       <Grid container
         rowSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
         columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
