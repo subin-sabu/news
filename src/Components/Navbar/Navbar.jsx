@@ -13,6 +13,8 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { Link } from 'react-router-dom';
+import reach from '../Assets/reach.PNG';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
 
@@ -41,29 +43,18 @@ function Navbar() {
   };
 
   return (
-    <AppBar sx={{ bgcolor: '#AD343E' }} position="static" >
+    <AppBar sx={{ bgcolor: '#181818' }} position="sticky" >
       <Container maxWidth="xl" >
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-           <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>REACH</Link> 
-          </Typography>
+        <Toolbar disableGutters sx={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+        {/* <Box sx={{display:'flex', justifyContent:'center'}}>
+          <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}><img src={reach} style={{maxWidth:'100px'}}/></Link>
+          </Box> */}
+          
+           
+         
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, maxWidth:'fit-content'}}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -103,24 +94,12 @@ function Navbar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}>
-            <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>REACH MEDIA</Link>
-          </Typography>
+          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+          <Box sx={{display:'flex', justifyContent:'center'}}>
+          <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}><img src={reach} style={{maxWidth:'100px'}}/></Link>
+          </Box>
+            
+          
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
@@ -136,7 +115,9 @@ function Navbar() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
+                <Avatar alt="Reach" src="/static/images/avatar/2.jpg" />
+                {/* <AccountCircleIcon sx={{width:'50px'}}/> */}
               </IconButton>
             </Tooltip>
             <Menu

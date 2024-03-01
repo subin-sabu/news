@@ -22,7 +22,7 @@ export default function NewsElaborate() {
 
 
               <CardContent sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
-                <Typography gutterBottom variant="h5" fontWeight='500' component="div" sx={{ mb: 1 }}>
+                <Typography gutterBottom variant="h5" fontWeight='600' component="div" sx={{ mb: 1 }}>
                   {news.title}
                 </Typography>
               </CardContent>

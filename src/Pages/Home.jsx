@@ -4,6 +4,7 @@ import HomeAd1 from '../Advertisements/HomeAd1'
 import NewsCardXS from '../Components/NewsCard/NewsCardXS'
 import { Container, useMediaQuery, useTheme } from '@mui/material'
 import MainNews from '../Components/MainNews/MainNews'
+import Footer from '../Components/Footer/Footer'
 
 
 function Home() {
@@ -18,18 +19,19 @@ function Home() {
       <Container>
 
         <HomeAd1 />
-        
-        <MainNews/>
-        
-      
-        
+
+        <MainNews />
+
+
+
 
 
         {matchXS && <NewsCardXS />}
         {aboveXS && <NewsCard />}
 
-
+        
       </Container>
+      <Footer />
 
 
     </div >

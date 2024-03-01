@@ -16,7 +16,7 @@ function News() {
             </Box>
 
           </Grid>
-          <Grid item md={3} sx={{display:'flex', flexDirection:'column', }}>
+          <Grid item md={3} sx={{display:'flex', flexDirection:'column', marginTop:'70px'}}>
             <NewsCard/>
           </Grid>
         </Grid>
