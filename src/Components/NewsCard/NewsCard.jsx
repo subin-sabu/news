@@ -42,7 +42,7 @@ export default function NewsCard() {
                     {news.title}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical' }}>
-                    {news.description}
+                    {news.description1}
                   </Typography>
                 </CardContent>
               </CardActionArea>

@@ -3,7 +3,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Grid, Paper } from '@mui/material';
 import {Box } from '@mui/system';
-import mainNews from '../Assets/main';
+import newsArray from '../Assets/news';
 import VideoContainer from '../iFrame Container/VideoContainer';
 import HomeAd1 from '../../Advertisements/HomeAd1';
 
@@ -17,7 +17,7 @@ export default function NewsElaborate() {
         columnSpacing={{ xs: 1 }}
         justifyContent='center'>
 
-        {mainNews.map((news, index) => (
+        {newsArray.slice(0,1).map((news, index) => (
           <Grid item key={index} xs={12}    >
             <Paper sx={{ maxWidth: '100%', height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: 'white', alignContent: 'center' }}>
 
@@ -35,11 +35,15 @@ export default function NewsElaborate() {
                 </Typography>
 
                 <Typography variant="body2" color="text.secondary" fontWeight={8} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical' }}>
-                  {news.description}
+                  {news.description1}
+                  <br />
+                  <br/>
+                  {news.description2}
                 </Typography>
                 <HomeAd1/>
                 <Typography variant="body2" color="text.secondary" fontWeight={8} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical' }}>
-                  {news.description}
+                  <br />
+                  {news.description3}
                 </Typography>
               </CardContent>
 

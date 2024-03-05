@@ -6,22 +6,22 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
-import mainNews from '../Assets/main';
+import newsArray from '../Assets/news';
 
 
 
-export default function MainNews() {
+export default function MainNews({className}) {
   return (
-    <Box sx={{ marginTop: '2rem' }}>
+    <Box className={className} sx={{ marginTop: '1rem' }}>
       <Grid container
         rowSpacing={{ xs: 1 }}
         columnSpacing={{ xs: 1 }}
         justifyContent='center'>
 
-        {mainNews.map((news, index) => (
+        {newsArray.slice(0,1).map((news, index) => (
           <Grid item key={index} xs={12}    >
             <Link to='/News' style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Card sx={{ maxWidth: 500, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <Card sx={{ minWidth: 200, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
               <CardActionArea sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
 
                 <CardContent sx={{ display:'flex', flexDirection:'row' ,textAlign:'center' }}>
@@ -41,7 +41,7 @@ export default function MainNews() {
                   </Typography>
                   
                   <Typography variant="body2" color="text.secondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '6', WebkitBoxOrient: 'vertical' }}>
-                    {news.description}
+                    {news.description1}
                   </Typography>
                 </CardContent>
               </CardActionArea>

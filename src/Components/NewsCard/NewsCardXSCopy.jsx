@@ -5,7 +5,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Box, CardActionArea, Grid } from '@mui/material';
 import {cutText} from '../../Utils/cutText'
-import newsArray from '../Assets/newsCopy';
+import newsArray from '../Assets/news';
 
 
 
@@ -17,7 +17,7 @@ export default function NewsCardXSCopy() {
         columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
         justifyContent='center'>
 
-        {newsArray.map((news, index) => (
+        {newsArray.slice(1,4).map((news, index) => (
           <Grid item key={index} xs={12}>
             <Card sx={{ maxWidth: 580, mx: 'auto' }}>
               <CardActionArea>

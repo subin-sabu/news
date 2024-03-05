@@ -1,0 +1,37 @@
+.grid-container{
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "snippet1 main snippet2";
+  grid-gap: 0.5rem;
+}
+
+.snippet1 { grid-area: snippet1; }
+.main { grid-area: main; }
+.snippet2 { grid-area: snippet2; }
+
+
+
+
+@media only screen and (max-width: 900px) {
+  .grid-container{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 
+      "main snippet1" 
+      "snippet2 snippet2";
+  }
+
+}
+
+@media only screen and (max-width: 550px) {
+  .grid-container{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: 
+      "main" 
+      "snippet1" 
+      "snippet2";
+  }
+}

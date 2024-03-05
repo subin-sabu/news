@@ -1,6 +1,7 @@
 import React from 'react';
 import './NewsScroll.css';
-import newsArray from '../Assets/news'; // Adjust the path as necessary
+import newsArray from '../Assets/news'; 
+
 
 function NewsScroll() {
   return (
@@ -9,8 +10,7 @@ function NewsScroll() {
         {newsArray.map((newsItem, index) => (
           <span key={index}>{newsItem.title}</span>
         ))}
-        {/* To simulate an infinite loop, you might consider duplicating the content,
-            but for a more dynamic and real infinite scroll, consider a different approach */}
+       
       </div>
     </div>
   );
