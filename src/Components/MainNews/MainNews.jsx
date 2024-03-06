@@ -8,51 +8,65 @@ import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
 import newsArray from '../Assets/news';
 import HomeAd16x9 from '../../Advertisements/HomeAd16x9';
+import NewsCard from '../NewsCard/NewsCard';
 
 
 
-export default function MainNews({className}) {
+export default function MainNews({ className }) {
   return (
-    <Box className={className} sx={{ marginTop: '1rem', display:'flex', flexDirection:'column', gap:'0.5rem', alignItems:'center', justifyContent:'space-between'}}>
+    <Box className={className} sx={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center', justifyContent: 'space-around' }}>
       <Grid container
         rowSpacing={{ xs: 1 }}
         columnSpacing={{ xs: 1 }}
-        justifyContent='center'>
+        justifyContent='center'
+        sx={{display: { xs: 'none', sm: 'block' }}}
+        >
 
-        {newsArray.slice(0,1).map((news, index) => (
+        {newsArray.slice(0, 1).map((news, index) => (
           <Grid item key={index} xs={12}    >
             <Link to='/News' style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Card sx={{ minWidth: 200, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <CardActionArea sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <Card sx={{ minWidth: 200, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                <CardActionArea sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
 
-                <CardContent sx={{ display:'flex', flexDirection:'row' ,textAlign:'center' }}>
-                  <Typography  variant="body2" fontWeight='600' component="div" fontSize={17} >
-                    {news.title}
-                  </Typography>
-                </CardContent>
-                <CardMedia sx={{width:'100%', maxWidth:'100%'}}
-                  component="img"
-                  height="auto"
-                  image={news.imageURL}
-                  alt="news image"
-                />
-                <CardContent sx={{ height: '80%',display: 'flex', flexDirection: 'column'}}>
-                  <Typography gutterBottom variant="caption" color='text.secondary' component="div" >
-                    {news.time}
-                  </Typography>
-                  
-                  <Typography variant="body2" color="text.secondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical', }}>
-                    {news.description1}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
+                  <CardContent sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
+                    <Typography variant="body2" fontWeight='600' component="div" fontSize={17} >
+                      {news.title}
+                    </Typography>
+                  </CardContent>
+                  <CardMedia sx={{ width: '100%', maxWidth: '100%' }}
+                    component="img"
+                    height="auto"
+                    image={news.imageURL}
+                    alt="news image"
+                  />
+                  <CardContent sx={{ height: '80%', display: 'flex', flexDirection: 'column' }}>
+                    <Typography gutterBottom variant="caption" color='text.secondary' component="div" >
+                      {news.time}
+                    </Typography>
+
+                    <Typography variant="body2" color="text.secondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical', }}>
+                      {news.description1}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
             </Link>
           </Grid>
         ))}
 
       </Grid>
-      <HomeAd16x9/>
+
+      {/* Optional Sections based on different viewports */}
+
+      <Box sx={{ width: '100%', display: { xs: 'block', sm: 'none' } }}>
+      <Link to='/News' style={{ textDecoration: 'none', color: 'inherit' }}>
+        <NewsCard startIndex={0} endIndex={1}/>
+      </Link>
+      </Box>
+
+      <Box sx={{ width: '100%', display: { xs: 'none', sm: 'block' } }}>
+        <HomeAd16x9 />
+      </Box>
     </Box>
 
   );

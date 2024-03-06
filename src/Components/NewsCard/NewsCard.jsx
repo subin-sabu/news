@@ -13,18 +13,19 @@ import { useTheme } from '@emotion/react';
 
 
 
-export default function NewsCard() {
+export default function NewsCard({startIndex, endIndex}) {
   const theme = useTheme();
   return (
-    <Box sx={{ marginTop: '2rem', marginBottom:'2rem'}}>
+    <Box >
       <Grid container
         rowSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
         columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
-        justifyContent='center'>
+        justifyContent='center'
+        >
 
-        {newsArray.map((news, index) => (
+        {newsArray.slice(startIndex,endIndex).map((news, index) => (
           <Grid item key={index} spacing={1} >
-            <Card sx={{  maxWidth: 360,
+            <Card sx={{  maxWidth: 400,
               [theme.breakpoints.up('sm')]:{maxWidth: 260},
               height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' , }}>
               <CardActionArea sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -41,10 +42,7 @@ export default function NewsCard() {
                   <Typography gutterBottom variant="body2" component="div" sx={{ mb: 1, fontWeight:'600'}}>
                     {news.title}
                   </Typography>
-                  <Typography variant="body2" color="text.secondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical' }}>
-                    {news.description1}
-                  </Typography>
-                </CardContent>
+                  </CardContent>
               </CardActionArea>
             </Card>
           </Grid>
