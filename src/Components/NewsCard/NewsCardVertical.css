@@ -1,18 +1,21 @@
-.container{
+.news-container{
   display: flex;
   flex-direction: column ;
-  justify-content: space-between;
+  justify-content: space-between;  
   gap: .4rem;
   margin-top: .4rem;
   margin-bottom: .4rem;
   min-width: 200px;
-}
+  max-width: 100%;
+  align-items: center;
+  }
 
-.container a{
+.news-container a{
   -webkit-tap-highlight-color: transparent;
 }
 
 .card {
+  max-width: 500px;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -42,7 +45,10 @@
   background-color: rgb(247, 243, 243);
 }
 
+.news-card-content{
+  display: flex;
 
+}
 
 .img-div{
   width: 25%;
@@ -54,12 +60,14 @@
   object-fit: cover;
   border-radius: 8px;
   aspect-ratio: 1/1;
+  width: 100%;
 }
 
 
 .news-content{
+  width: 70%;
   padding-left: 8px;
-   display:flex;
+  display:flex;
   flex-direction: column;
   justify-content: space-evenly;
 }

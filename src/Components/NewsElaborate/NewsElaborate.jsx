@@ -23,7 +23,18 @@ export default function NewsElaborate() {
 
 
               <CardContent sx={{ display: 'flex', flexDirection: 'row', textAlign: 'center' }}>
-                <Typography gutterBottom variant="h5" fontWeight='600' component="div" sx={{ mb: 1 }}>
+                <Typography gutterBottom fontWeight='600' component="div"  sx={{
+      
+        fontSize: '1.5rem', // default 
+        '@media (min-width:0px)': {
+     
+          fontSize: '0.875rem', // for mobile
+        },
+        '@media (min-width:600px)': {
+          
+          fontSize: '1.5rem', // for bigger screens
+        },
+      }}>
                   {news.title}
                 </Typography>
               </CardContent>

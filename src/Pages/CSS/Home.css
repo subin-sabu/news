@@ -10,11 +10,12 @@
 .snippet1 { grid-area: snippet1; }
 .main { grid-area: main; }
 .snippet2 { grid-area: snippet2; }
+.ad2 { grid-area: ad2;}
 
 
 
 
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1079px) {
   .grid-container{
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
@@ -25,13 +26,15 @@
 
 }
 
-@media only screen and (max-width: 550px) {
+
+@media only screen and (max-width: 650px) {
   .grid-container{
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    grid-template-rows: auto auto auto auto;
     grid-template-areas: 
       "main" 
-      "snippet1" 
+      "snippet1"
+      "ad2" 
       "snippet2";
   }
 }

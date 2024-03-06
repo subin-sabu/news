@@ -25,7 +25,7 @@ export default function NewsCard({startIndex, endIndex}) {
 
         {newsArray.slice(startIndex,endIndex).map((news, index) => (
           <Grid item key={index} spacing={1} >
-            <Card sx={{  maxWidth: 400,
+            <Card sx={{  maxWidth: 500,
               [theme.breakpoints.up('sm')]:{maxWidth: 260},
               height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' , }}>
               <CardActionArea sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>

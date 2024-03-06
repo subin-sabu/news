@@ -3,7 +3,7 @@ import newsArray from '../Assets/news';
 import './NewsCardVertical.css';
 import { Link } from 'react-router-dom';
 
-function NewsCardVertical({startIndex, endIndex}) {
+function NewsCardVertical({ startIndex, endIndex }) {
   const [ripples, setRipples] = useState({});
 
   const addRipple = (index, event) => {
@@ -26,13 +26,14 @@ function NewsCardVertical({startIndex, endIndex}) {
   };
 
   return (
-    <div className='container'>
+
+    <div className='news-container'>
       {newsArray.slice(startIndex, endIndex).map((news, index) => (
-        <div key={index}>
-          <Link to="#" style={{ textDecoration: 'none', color: 'inherit' }} onClick={(event) => event.preventDefault()}>
-            <div className='card' 
-                 onMouseDown={(event) => addRipple(index, event)}
-                 onMouseUp={() => removeRipple(index)}>
+        <div key={index} className='card'>
+          <Link to='/Events' style={{ textDecoration: 'none', color: 'inherit' }} onClick={(event) => event.preventDefault()}>
+            <div className='news-card-content'
+              onMouseDown={(event) => addRipple(index, event)}
+              onMouseUp={() => removeRipple(index)}>
               {/* Ripple Element */}
               {ripples[index] && (
                 <span
@@ -62,6 +63,7 @@ function NewsCardVertical({startIndex, endIndex}) {
         </div>
       ))}
     </div>
+
   );
 }
 

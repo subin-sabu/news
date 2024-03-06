@@ -14,7 +14,7 @@ import NewsCard from '../NewsCard/NewsCard';
 
 export default function MainNews({ className }) {
   return (
-    <Box className={className} sx={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center', justifyContent: 'space-around' }}>
+    <Box className={className} sx={{ marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center', justifyContent: 'space-around' }}>
       <Grid container
         rowSpacing={{ xs: 1 }}
         columnSpacing={{ xs: 1 }}
