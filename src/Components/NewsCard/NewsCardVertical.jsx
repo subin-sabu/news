@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import newsArray from '../Assets/news';
-import './NewsCardTest.css';
+import './NewsCardVertical.css';
 import { Link } from 'react-router-dom';
 
-function NewsCardTest() {
+function NewsCardVertical({startIndex, endIndex}) {
   const [ripples, setRipples] = useState({});
 
   const addRipple = (index, event) => {
@@ -27,7 +27,7 @@ function NewsCardTest() {
 
   return (
     <div className='container'>
-      {newsArray.slice(1,7).map((news, index) => (
+      {newsArray.slice(startIndex, endIndex).map((news, index) => (
         <div key={index}>
           <Link to="#" style={{ textDecoration: 'none', color: 'inherit' }} onClick={(event) => event.preventDefault()}>
             <div className='card' 
@@ -65,4 +65,4 @@ function NewsCardTest() {
   );
 }
 
-export default NewsCardTest;
+export default NewsCardVertical;

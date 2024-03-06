@@ -2,7 +2,7 @@ import React from 'react'
 import NewsElaborate from '../Components/NewsElaborate/NewsElaborate'
 import NewsAd1 from '../Advertisements/NewsAd1'
 import { Grid, Box, Container } from '@mui/material'
-import NewsCardTest from '../Components/NewsCard/NewsCardTest'
+import NewsCardVertical from '../Components/NewsCard/NewsCardVertical'
 
 function News() {
   return (
@@ -14,10 +14,9 @@ function News() {
             <Box>
               <NewsElaborate />
             </Box>
-
           </Grid>
           <Grid item xs={12} md={4} sx={{display:'flex', flexDirection:'column', marginTop:'25px' }}>
-            <NewsCardTest/>
+            <NewsCardVertical startIndex={1} endIndex={13}/>
           </Grid>
         </Grid>
 

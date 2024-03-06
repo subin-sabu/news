@@ -3,7 +3,7 @@ import "./CSS/Home.css";
 import HomeAd1 from '../Advertisements/HomeAd1';
 import { Container } from '@mui/material';
 import MainNews from '../Components/MainNews/MainNews';
-import NewsCardTestCopy from '../Components/NewsCard/NewsCardTestCopy';
+import NewsCardVertical from '../Components/NewsCard/NewsCardVertical';
 
 
 function Home() {
@@ -12,9 +12,9 @@ function Home() {
       <Container>
         <HomeAd1 />
         <div className='grid-container'>
-          <NewsCardTestCopy className='snippet1'/>
+          <NewsCardVertical className='snippet1' startIndex={1} endIndex={7}/>
           <MainNews className='main' />
-          <NewsCardTestCopy className='snippet2'/>
+          <NewsCardVertical className='snippet2' startIndex={7} endIndex={13}/>
         </div>
       </Container>
     </div>

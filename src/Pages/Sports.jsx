@@ -1,13 +1,13 @@
 import React from 'react'
 import { Container } from '@mui/material'
-import NewsCardTest from '../Components/NewsCard/NewsCardTest'
+import NewsCardVertical from '../Components/NewsCard/NewsCardVertical'
 
 
 function Sports() {
   return (
     <div>
       <Container>
-        <NewsCardTest />
+        <NewsCardVertical />
       </Container>
     </div>
   )

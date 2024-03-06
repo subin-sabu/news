@@ -7,12 +7,13 @@ import { CardActionArea, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
 import newsArray from '../Assets/news';
+import HomeAd16x9 from '../../Advertisements/HomeAd16x9';
 
 
 
 export default function MainNews({className}) {
   return (
-    <Box className={className} sx={{ marginTop: '1rem' }}>
+    <Box className={className} sx={{ marginTop: '1rem', display:'flex', flexDirection:'column', gap:'0.5rem', alignItems:'center', justifyContent:'space-between'}}>
       <Grid container
         rowSpacing={{ xs: 1 }}
         columnSpacing={{ xs: 1 }}
@@ -40,7 +41,7 @@ export default function MainNews({className}) {
                     {news.time}
                   </Typography>
                   
-                  <Typography variant="body2" color="text.secondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '6', WebkitBoxOrient: 'vertical' }}>
+                  <Typography variant="body2" color="text.secondary" sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '3', WebkitBoxOrient: 'vertical', }}>
                     {news.description1}
                   </Typography>
                 </CardContent>
@@ -51,6 +52,7 @@ export default function MainNews({className}) {
         ))}
 
       </Grid>
+      <HomeAd16x9/>
     </Box>
 
   );
