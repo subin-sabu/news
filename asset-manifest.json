@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/news/static/css/main.5cff8c4a.css",
-    "main.js": "/news/static/js/main.5ba89a8c.js",
+    "main.css": "/news/static/css/main.dc103096.css",
+    "main.js": "/news/static/js/main.98b70d6a.js",
     "static/js/453.d855a71b.chunk.js": "/news/static/js/453.d855a71b.chunk.js",
     "static/media/HomAd1.gif": "/news/static/media/HomAd1.40a8de4afe311a6fbed9.gif",
     "static/media/3.jpg": "/news/static/media/3.981cc34896859195703b.jpg",
@@ -14,17 +14,18 @@
     "static/media/10.jpg": "/news/static/media/10.c904d5d0e0cc7ad80188.jpg",
     "static/media/6.jpg": "/news/static/media/6.d79ee99bd56e389bf16c.jpg",
     "static/media/1.jpg": "/news/static/media/1.5d7c906dbf5650c1f31a.jpg",
+    "static/media/kerala_vision_ad.jpeg": "/news/static/media/kerala_vision_ad.5f1a1a47f3fdfad765f3.jpeg",
     "static/media/7.jpg": "/news/static/media/7.914ad7bc75ce57e6208d.jpg",
     "static/media/13.jpg": "/news/static/media/13.4de7f05ec43188f08152.jpg",
     "static/media/12.jpg": "/news/static/media/12.55c7554c6ba71197a4bd.jpg",
     "static/media/reach.PNG": "/news/static/media/reach.90ba50d7d9cdaa9be149.PNG",
     "index.html": "/news/index.html",
-    "main.5cff8c4a.css.map": "/news/static/css/main.5cff8c4a.css.map",
-    "main.5ba89a8c.js.map": "/news/static/js/main.5ba89a8c.js.map",
+    "main.dc103096.css.map": "/news/static/css/main.dc103096.css.map",
+    "main.98b70d6a.js.map": "/news/static/js/main.98b70d6a.js.map",
     "453.d855a71b.chunk.js.map": "/news/static/js/453.d855a71b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5cff8c4a.css",
-    "static/js/main.5ba89a8c.js"
+    "static/css/main.dc103096.css",
+    "static/js/main.98b70d6a.js"
   ]
 }
