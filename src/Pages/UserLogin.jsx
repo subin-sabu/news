@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Button, Card, CardContent, Checkbox, FormControlLabel, Grid, Link, TextField, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, Checkbox, FormControlLabel, Grid, TextField, Typography } from '@mui/material';
+import { Link } from 'react-router-dom'; // Ensure you've imported Link from react-router-dom
 
 const UserLogin = ({ onLogin, errorMessage }) => {
   const [loginData, setLoginData] = useState({
@@ -21,7 +22,6 @@ const UserLogin = ({ onLogin, errorMessage }) => {
     onLogin(loginData);
   };
 
-  
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
       <Card sx={{ maxWidth: 500, width: '100%' }}>
@@ -55,7 +55,11 @@ const UserLogin = ({ onLogin, errorMessage }) => {
                   value={loginData.password}
                   onChange={handleChange}
                 />
-
+                {errorMessage && (
+                  <Typography color="error" variant="body2">
+                    {errorMessage}
+                  </Typography>
+                )}
               </Grid>
               <Grid item xs={6}>
                 <FormControlLabel
@@ -71,16 +75,9 @@ const UserLogin = ({ onLogin, errorMessage }) => {
                 />
               </Grid>
               <Grid item xs={6} display="flex" justifyContent="flex-end">
-                <Link href="#" variant="body2">
+                <Link to="/Forgot" variant="body2">
                   Forgot Password?
                 </Link>
-              </Grid>
-              <Grid item xs={12}>
-                {errorMessage && (
-                  <Typography color="error" variant="body2">
-                    {errorMessage}
-                  </Typography>
-                )}
               </Grid>
               <Grid item xs={12}>
                 <Button
@@ -92,6 +89,11 @@ const UserLogin = ({ onLogin, errorMessage }) => {
                 >
                   Login
                 </Button>
+              </Grid>
+              <Grid item xs={12} display="flex" justifyContent="center">
+                <Link to="/SignUp" variant="body2" style={{ textDecoration: 'none', marginTop: '8px' }}>
+                  Create an Account
+                </Link>
               </Grid>
             </Grid>
           </Box>

@@ -16,6 +16,7 @@ import Footer from './Components/Footer/Footer';
 import NewsScroll from './Components/NewsScroll/NewsScroll';
 import UserSignUp from './Pages/UserSignUp';
 import UserLogin from './Pages/UserLogin';
+import ResetPassword from './Pages/ResetPassword';
 
 
 
@@ -36,7 +37,8 @@ function App() {
         <Route path='/Tech' element={<Tech />} />
         <Route path='/Auto' element={<Auto />} />
         <Route path='/SignUp' element={<UserSignUp/>} />
-        <Route path='Login' element= {<UserLogin/>} />
+        <Route path='/Login' element= {<UserLogin/>} />
+        <Route path='/Forgot' element= {<ResetPassword/>} />
       </Routes>
       <Footer/>
     <NewsScroll/>
