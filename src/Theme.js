@@ -10,7 +10,7 @@ const theme = createTheme({
       main: '#F12148',
     },
     secondary: {
-      main: '#F32148',
+      main: '#181818',
     },
     // Add more colors or customize the theme further
   },

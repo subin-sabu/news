@@ -14,6 +14,7 @@ import Tech from './Pages/Tech';
 import TopNav from './Components/Navbar/TopNav';
 import Footer from './Components/Footer/Footer';
 import NewsScroll from './Components/NewsScroll/NewsScroll';
+import UserSignUp from './Pages/UserSignUp';
 
 
 
@@ -33,6 +34,7 @@ function App() {
         <Route path='/Sports' element={<Sports />} />
         <Route path='/Tech' element={<Tech />} />
         <Route path='/Auto' element={<Auto />} />
+        <Route path='/SignUp' element={<UserSignUp/>} />
       </Routes>
       <Footer/>
     <NewsScroll/>
