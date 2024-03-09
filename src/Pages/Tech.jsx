@@ -1,8 +1,11 @@
 import React from 'react'
+import NewsCardScroll from '../Components/NewsCard/NewsCardScroll'
 
 function Tech() {
   return (
-    <div>Tech</div>
+    <div>
+      <NewsCardScroll/>
+    </div>
   )
 }
 
