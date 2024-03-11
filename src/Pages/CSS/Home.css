@@ -18,16 +18,20 @@
 @media only screen and (max-width: 1079px) {
   .grid-container{
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr ;
     grid-template-areas: 
       "main snippet1" 
       "snippet2 snippet2";
   }
+  .snippet2{
+    display: none !important;
+  }
+ 
 
 }
 
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 600px) {
   .grid-container{
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto;

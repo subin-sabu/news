@@ -11,19 +11,28 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import reach from '../Assets/reach.PNG';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+// Mock functions and data - Replace these with your actual authentication and user data logic
+const isAuthenticated = () => {
+  // Implement authentication check logic here
+  // Return true if user is logged in, otherwise false
+  return false; // Default to false for demonstration
+};
 
-
-
+const getUserProfile = () => {
+  // Implement user profile retrieval logic here
+  // Return user profile data
+  return { name: "John Doe", profilePic: "" }; // Default data for demonstration
+};
 
 const pages = ['Home', 'News', 'Events', 'Entertainment', 'LifeStyle', 'Sports', 'Auto', 'Tech'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = isAuthenticated() ? ['Profile', 'Account', 'Dashboard', 'Logout'] : ['Login', 'SignUp'];
 
 function Navbar() {
+  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -42,19 +51,13 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+  const user = getUserProfile();
+
   return (
-    <AppBar sx={{ bgcolor: '#181818' }} position="sticky" >
-      <Container maxWidth="xl" >
-        <Toolbar disableGutters sx={{display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
-
-        {/* <Box sx={{display:'flex', justifyContent:'center'}}>
-          <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}><img src={reach} style={{maxWidth:'100px'}}/></Link>
-          </Box> */}
-          
-           
-         
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, maxWidth:'fit-content'}}>
+    <AppBar sx={{ bgcolor: '#181818' }} position="sticky">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, maxWidth: 'fit-content' }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -84,40 +87,43 @@ function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu} >
-                  {/* Added link here*/}
-                  <Typography textAlign="center">
-                    <Link to={`./${page}`} style={{ textDecoration: 'none', color: 'inherit' }}>{page}</Link>
-                  </Typography>
-
+                <MenuItem key={page} onClick={() => { handleCloseNavMenu(); navigate(`./${page}`); }}>
+                  <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
-          {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
-          <Box sx={{display:'flex', justifyContent:'center'}}>
-          <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}><img src={reach} style={{maxWidth:'100px'}}/></Link>
+
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+              <img src={reach} alt="Logo" style={{ maxWidth: '100px' }}/>
+            </Link>
           </Box>
-            
-          
+
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => navigate(`./${page}`)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                <Link to={`./${page}`} style={{ textDecoration: 'none', color: 'inherit' }}>{page}</Link>
+                {page}
               </Button>
             ))}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                {/* <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" /> */}
-                <Avatar alt="Reach" src="/static/images/avatar/2.jpg" />
-                {/* <AccountCircleIcon sx={{width:'50px'}}/> */}
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} aria-label="account of current user">
+                {isAuthenticated() ? (
+                  user.profilePic ? (
+                    <Avatar src={user.profilePic} alt={user.name.charAt(0)} />
+                  ) : (
+                    <Avatar>{user.name.charAt(0)}</Avatar>
+                  )
+                ) : (
+                  <Avatar><AccountCircleIcon /></Avatar>
+                )}
               </IconButton>
             </Tooltip>
             <Menu
@@ -137,7 +143,7 @@ function Navbar() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={() => { handleCloseUserMenu(); navigate(`./${setting}`); }}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

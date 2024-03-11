@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Box, Typography, Grid, Fade, Checkbox, FormControlLabel, Link, Card, CardContent, IconButton, InputAdornment } from '@mui/material';
+import { TextField, Button, Box, Typography, Grid, Fade, Checkbox, FormControlLabel, Card, CardContent, IconButton, InputAdornment } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Link } from 'react-router-dom';
 
 const UserSignUp = () => {
   const [formData, setFormData] = useState({
@@ -179,7 +180,7 @@ const UserSignUp = () => {
                 <Grid item xs={12}>
                   <FormControlLabel
                     control={<Checkbox checked={formData.acceptTerms} onChange={handleAcceptTermsChange} name="acceptTerms" color="primary" />}
-                    label={<React.Fragment>I accept the <Link href="#" underline="hover">Terms and Conditions</Link>.</React.Fragment>}
+                    label={<React.Fragment>I accept the <Link to="#" underline="hover">Terms and Conditions</Link>.</React.Fragment>}
                   />
                 </Grid>
                 <Grid item xs={12}>
