@@ -11,6 +11,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { styled, useTheme } from '@mui/material/styles';
 import newsArray from '../Assets/news';
+import { Hidden } from '@mui/material';
 
 const InfiniteScrollContainer = styled(Box)(({ theme }) => ({
   overflowX: 'hidden',
@@ -100,7 +101,7 @@ export default function NewsCardScroll({ startIndex, endIndex }) {
                     <Typography gutterBottom variant="caption" color="text.secondary">
                       {news.time}
                     </Typography>
-                    <Typography gutterBottom variant="body2" sx={{ fontWeight: '600' }}>
+                    <Typography gutterBottom variant="body2" sx={{ fontWeight: '600'}}>
                       {news.title}
                     </Typography>
                   </CardContent>

@@ -4,154 +4,145 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import { useNavigate, Link } from 'react-router-dom';
-import reach from '../Assets/reach.PNG';
+import Drawer from '@mui/material/Drawer';
+import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Link, useNavigate } from 'react-router-dom';
+import reach from '../Assets/reach.PNG';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
 
-// Mock functions and data - Replace these with your actual authentication and user data logic
-const isAuthenticated = () => {
-  // Implement authentication check logic here
-  // Return true if user is logged in, otherwise false
-  return false; // Default to false for demonstration
-};
-
-const getUserProfile = () => {
-  // Implement user profile retrieval logic here
-  // Return user profile data
-  return { name: "John Doe", profilePic: "" }; // Default data for demonstration
-};
+// Mock functions and data
+const isAuthenticated = () => false;
+const getUserProfile = () => ({ name: "John Doe", profilePic: "" });
 
 const pages = ['Home', 'News', 'Events', 'Entertainment', 'LifeStyle', 'Sports', 'Auto', 'Tech'];
 const settings = isAuthenticated() ? ['Profile', 'Account', 'Dashboard', 'Logout'] : ['Login', 'SignUp'];
 
 function Navbar() {
   const navigate = useNavigate();
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileSettingsOpen, setMobileSettingsOpen] = React.useState(false);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleSettingsToggle = () => {
+    setMobileSettingsOpen(!mobileSettingsOpen);
   };
 
   const user = getUserProfile();
 
+  const drawerPages = (
+    <Box onClick={handleDrawerToggle} sx={{ width: 250 }}>
+      <Typography variant="h6" sx={{ my: 2, textAlign: 'center' }}>
+        Pages
+      </Typography>
+      <List>
+        {pages.map((page) => (
+          <ListItem key={page} disablePadding>
+            <ListItemButton onClick={() => navigate(`/${page}`)}>
+              <ListItemText primary={page} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
+  const drawerSettings = (
+    <Box onClick={handleSettingsToggle} sx={{ width: 250 }}>
+      <Typography variant="h6" sx={{ my: 2, textAlign: 'center' }}>
+        Settings
+      </Typography>
+      <List>
+        {settings.map((setting) => (
+          <ListItem key={setting} disablePadding>
+            <ListItemButton onClick={() => navigate(`/${setting}`)}>
+              <ListItemText primary={setting} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+
   return (
     <AppBar sx={{ bgcolor: '#181818' }} position="sticky">
       <Container maxWidth="xl">
-        <Toolbar disableGutters sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' }, maxWidth: 'fit-content' }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={() => { handleCloseNavMenu(); navigate(`./${page}`); }}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-
-          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-            <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
-              <img src={reach} alt="Logo" style={{ maxWidth: '100px' }}/>
+        <Toolbar disableGutters>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { md: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
+          {/* Logo/Image Box */}
+          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-start' }}>
+            <Link to="/">
+              <img src={reach} alt="Logo" style={{ maxHeight: '50px' }} />
             </Link>
           </Box>
-
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          {/* Navigation Links for Larger Screens */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={() => navigate(`./${page}`)}
+                onClick={() => navigate(`/${page}`)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
               </Button>
             ))}
           </Box>
-
-          <Box sx={{ flexGrow: 0 }}>
+          {/* User Account Icon/Avatar */}
+          <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center' }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} aria-label="account of current user">
-                {isAuthenticated() ? (
-                  user.profilePic ? (
-                    <Avatar src={user.profilePic} alt={user.name.charAt(0)} />
-                  ) : (
-                    <Avatar>{user.name.charAt(0)}</Avatar>
-                  )
-                ) : (
-                  <Avatar><AccountCircleIcon /></Avatar>
-                )}
+              <IconButton onClick={handleSettingsToggle} sx={{ p: 0, mr: 2, display: { md: 'none' } }}>
+                <Avatar><AccountCircleIcon /></Avatar>
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={() => { handleCloseUserMenu(); navigate(`./${setting}`); }}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
+                <Button key={setting} onClick={() => navigate(`/${setting}`)} sx={{ color: 'white' }}>
+                  {setting}
+                </Button>
               ))}
-            </Menu>
+            </Box>
           </Box>
         </Toolbar>
       </Container>
+      {/* Mobile Drawer for Pages */}
+      <Drawer
+        anchor="left"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        sx={{ display: { xs: 'block', md: 'none' } }}
+      >
+        {drawerPages}
+      </Drawer>
+      {/* Mobile Drawer for Settings */}
+      <Drawer
+        anchor="right"
+        open={mobileSettingsOpen}
+        onClose={handleSettingsToggle}
+        sx={{ display: { xs: 'block', md: 'none' } }}
+      >
+        {drawerSettings}
+      </Drawer>
     </AppBar>
   );
 }
+
 export default Navbar;

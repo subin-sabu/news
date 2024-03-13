@@ -17,6 +17,7 @@ import NewsScroll from './Components/NewsScroll/NewsScroll';
 import UserSignUp from './Pages/UserSignUp';
 import UserLogin from './Pages/UserLogin';
 import ResetPassword from './Pages/ResetPassword';
+import NewsForm from './Components/NewsForm/NewsForm';
 
 
 
@@ -39,6 +40,7 @@ function App() {
         <Route path='/SignUp' element={<UserSignUp/>} />
         <Route path='/Login' element= {<UserLogin/>} />
         <Route path='/Forgot' element= {<ResetPassword/>} />
+        <Route path='/ReportNews' element= {<NewsForm/>} />
       </Routes>
       <Footer/>
     <NewsScroll/>
