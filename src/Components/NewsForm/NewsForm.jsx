@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material';
+import api from '../../api'; // Ensure this axios instance is correctly configured
 
 const NewsForm = () => {
   const [formValues, setFormValues] = useState({
@@ -9,9 +10,11 @@ const NewsForm = () => {
     tags: '',
     imageUrlOption: 'url', // 'url' or 'upload'
     imageUrl: '',
+    imageFile: null,
     imageCredit: '',
     videoUrlOption: 'url', // 'url' or 'upload'
     videoUrl: '',
+    videoFile: null,
     videoCredit: '',
     description1: '',
     description2: '',
@@ -22,8 +25,7 @@ const NewsForm = () => {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === "imageFile" || name === "videoFile") {
-      // Placeholder for file handling logic
-      console.log("File upload not directly handled in this snippet");
+      setFormValues(prev => ({ ...prev, [name]: files[0] }));
     } else {
       setFormValues(prev => ({ ...prev, [name]: value }));
     }
@@ -34,11 +36,35 @@ const NewsForm = () => {
     setFormValues(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically send the formValues to your backend
-    console.log(formValues);
+
+    const formData = new FormData();
+    Object.keys(formValues).forEach(key => {
+      if (key === 'tags' && formValues[key]) {
+        formData.append(key, JSON.stringify(formValues[key].split(',').map(tag => tag.trim())));
+      } else if ((key === 'imageFile' || key === 'videoFile') && formValues[key] !== null) {
+        formData.append(key, formValues[key]);
+      } else if (!key.includes('Option') && formValues[key] !== null) {
+        formData.append(key, formValues[key]);
+      }
+    });
+
+    try {
+      const response = await api.post('/news', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        },
+      });
+      
+      console.log(response.data);
+      // Optionally, clear form/reset state or show success message here
+    } catch (error) {
+      console.error('Error submitting form: ', error);
+      // Optionally, handle error/show error message here
+    }
   };
+  
 
   return (
     <form onSubmit={handleSubmit}>
