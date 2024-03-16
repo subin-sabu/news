@@ -1,17 +1,34 @@
 import React, { useState } from 'react';
-import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material';
-import api from '../../api'; 
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+  Typography,
+  Snackbar,
+  Alert
+} from '@mui/material';
+import { collection, addDoc } from 'firebase/firestore';
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { db } from '../../firebase/config'; // Assuming db is correctly initialized elsewhere
+
+// Initialize Storage
+const storage = getStorage();
+
 const NewsForm = () => {
   const [formValues, setFormValues] = useState({
     title: '',
     category: '',
     reporterName: '',
     tags: '',
-    imageUrlOption: 'url', // 'url' or 'upload'
+    imageUrlOption: 'url',
     imageUrl: '',
     imageFile: null,
     imageCredit: '',
-    videoUrlOption: 'url', // 'url' or 'upload'
+    videoUrlOption: 'url',
     videoUrl: '',
     videoFile: null,
     videoCredit: '',
@@ -20,6 +37,9 @@ const NewsForm = () => {
     description3: '',
     description4: '',
   });
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success'); // or "error"
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -35,51 +55,79 @@ const NewsForm = () => {
     setFormValues(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
+  const uploadFile = async (file, path) => {
+    if (!file) return null;
+    const fileRef = ref(storage, `${path}/${file.name}`);
+    const snapshot = await uploadBytes(fileRef, file);
+    const url = await getDownloadURL(snapshot.ref);
+    return url;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-    Object.keys(formValues).forEach(key => {
-      if (key === 'tags' && formValues[key]) {
-        formData.append(key, JSON.stringify(formValues[key].split(',').map(tag => tag.trim())));
-      } else if ((key === 'imageFile' || key === 'videoFile') && formValues[key] !== null) {
-        formData.append(key, formValues[key]);
-      } else if (!key.includes('Option') && formValues[key] !== null) {
-        formData.append(key, formValues[key]);
-      }
-    });
+    const imageUrl = formValues.imageUrlOption === 'upload' && formValues.imageFile
+      ? await uploadFile(formValues.imageFile, 'images')
+      : formValues.imageUrl || null;
+    const videoUrl = formValues.videoUrlOption === 'upload' && formValues.videoFile
+      ? await uploadFile(formValues.videoFile, 'videos')
+      : formValues.videoUrl || null;
+
+    const newsData = {
+      ...formValues,
+      imageUrl,
+      videoUrl,
+      tags: formValues.tags ? formValues.tags.split(',').map(tag => tag.trim()) : [],
+      imageFile: null, // Excluded from Firestore, but set to null for consistency
+      videoFile: null, // Excluded from Firestore, but set to null for consistency
+      // Ensure other fields are set to null if they are empty
+      title: formValues.title || null,
+      category: formValues.category || null,
+      reporterName: formValues.reporterName || null,
+      imageCredit: formValues.imageCredit || null,
+      videoCredit: formValues.videoCredit || null,
+      description1: formValues.description1 || null,
+      description2: formValues.description2 || null,
+      description3: formValues.description3 || null,
+      description4: formValues.description4 || null,
+    };
 
     try {
-      const response = await api.post('/news', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        },
-      });
-      
-      console.log(response.data);
-      // Optionally, clear form/reset state or show success message here
+      await addDoc(collection(db, "news"), newsData);
+      setSnackbarMessage('News uploaded successfully!');
+      setSnackbarSeverity('success');
+      setOpenSnackbar(true);
     } catch (error) {
-      console.error('Error submitting form: ', error);
-      // Optionally, handle error/show error message here
+      console.error('Error uploading news: ', error);
+      setSnackbarMessage('Error uploading news. Please try again.');
+      setSnackbarSeverity('error');
+      setOpenSnackbar(true);
     }
   };
-  
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Typography variant="h6" gutterBottom>
-        News Entry Form
-      </Typography>
-      <TextField
-        label="Title"
-        variant="outlined"
-        name="title"
-        value={formValues.title}
-        onChange={handleChange}
-        fullWidth
-        required
-        margin="normal"
-      />
+    <>
+      <form onSubmit={handleSubmit}>
+        <Typography variant="h6" gutterBottom>
+          News Entry Form
+        </Typography>
+        <TextField
+          label="Title"
+          variant="outlined"
+          name="title"
+          value={formValues.title}
+          onChange={handleChange}
+          fullWidth
+          required
+          margin="normal"
+        />
       <TextField
         label="Category"
         variant="outlined"
@@ -172,15 +220,15 @@ const NewsForm = () => {
       />
       {/* Description fields */}
       <TextField
-        label="Description 1"
-        variant="outlined"
-        name="description1"
-        value={formValues.description1}
-        onChange={handleChange}
-        fullWidth
-        multiline
-        margin="normal"
-      />
+          label="Description 1"
+          variant="outlined"
+          name="description1"
+          value={formValues.description1}
+          onChange={handleChange}
+          fullWidth
+          multiline
+          margin="normal"
+        />
       <TextField
         label="Description 2"
         variant="outlined"
@@ -214,7 +262,14 @@ const NewsForm = () => {
       <Button type="submit" variant="contained" color="primary">
         Submit
       </Button>
-    </form>
+      
+      </form>
+      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleSnackbarClose}>
+        <Alert onClose={handleSnackbarClose} severity={snackbarSeverity} sx={{ width: '100%' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 
