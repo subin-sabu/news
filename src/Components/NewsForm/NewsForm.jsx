@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material';
-import api from '../../api'; // Ensure this axios instance is correctly configured
-
+import api from '../../api'; 
 const NewsForm = () => {
   const [formValues, setFormValues] = useState({
     title: '',
