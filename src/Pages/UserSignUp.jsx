@@ -1,8 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Box, Typography, Grid, Fade, Checkbox, FormControlLabel, Card, CardContent, IconButton, InputAdornment } from '@mui/material';
+import {
+  TextField,
+  Button,
+  Box,
+  Typography,
+  Grid,
+  Fade,
+  Checkbox,
+  FormControlLabel,
+  Card,
+  CardContent,
+  IconButton,
+  InputAdornment,
+  CircularProgress
+} from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { Link } from 'react-router-dom';
+import { auth } from '../firebase/config';
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const UserSignUp = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +32,8 @@ const UserSignUp = () => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [formError, setFormError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const allowedDomains = [
     "gmail.com", "yahoo.com", "yahoo.in", "outlook.com", "live.com", "rediffmail.com", "icloud.com"
@@ -28,9 +46,9 @@ const UserSignUp = () => {
                         formData.lastName.match(/^[a-zA-Z.]+$/) &&
                         isValidEmailDomain &&
                         formData.password.length >= 8 &&
-                        /[A-Z]/.test(formData.password) && // Checks for an uppercase letter
-                        /[a-z]/.test(formData.password) && // Checks for a lowercase letter
-                        /\d/.test(formData.password) && // Checks for a digit
+                        /[A-Z]/.test(formData.password) &&
+                        /[a-z]/.test(formData.password) &&
+                        /\d/.test(formData.password) &&
                         formData.acceptTerms;
     setIsFormValid(isValidForm);
   }, [formData]);
@@ -41,6 +59,7 @@ const UserSignUp = () => {
       ...prevState,
       [name]: value,
     }));
+    setFormError(''); // Reset form error on input change
 
     if (name === 'email') {
       setEmailError('');
@@ -53,8 +72,6 @@ const UserSignUp = () => {
       ...prevState,
       password: value,
     }));
-
-    // Reset password error state on change
     setPasswordError('');
   };
 
@@ -62,10 +79,20 @@ const UserSignUp = () => {
     setFormData({ ...formData, acceptTerms: event.target.checked });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(formData);
-    // Add submission logic here
+    if (!isFormValid) return; // Early return if form is not valid
+
+    setLoading(true);
+    try {
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      // Success - you can redirect or clear form here
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+      setFormError("Failed to sign up. Please try again."); // Simplified error handling for demonstration
+    }
   };
 
   const handleBlur = (event) => {
@@ -76,7 +103,6 @@ const UserSignUp = () => {
         setEmailError('Enter a valid email address');
       }
     } else if (name === 'password') {
-      // Validate password criteria on blur
       if (formData.password.length < 8 || !/[A-Z]/.test(formData.password) || !/[a-z]/.test(formData.password) || !/\d/.test(formData.password)) {
         setPasswordError('Password must be at least 8 characters, include an uppercase letter, a lowercase letter, and a number.');
       }
