@@ -79,7 +79,7 @@ const NewsManager = () => {
         open={openDialog}
         onClose={handleDialogClose}
         aria-labelledby="responsive-dialog-title"
-      >
+       >
         <DialogTitle id="responsive-dialog-title">
           {"Are you sure you want to delete this news? This action is irreversible."}
         </DialogTitle>
