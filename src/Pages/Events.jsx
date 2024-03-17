@@ -1,11 +1,12 @@
 import React from 'react'
+import NewsCard from '../Components/NewsCard/NewsCard'
 
 
 function Events() {
   return (
     <div>
     
-      Events
+     <NewsCard/>
     </div>
   )
 }

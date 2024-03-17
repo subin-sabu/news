@@ -6,14 +6,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@mui/material/styles';
 import Theme from './Theme'
+import {NewsProvider} from './Context/NewsContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <HashRouter>
+      <NewsProvider>
       <ThemeProvider theme={Theme}>
         <App />
       </ThemeProvider>
+      </NewsProvider>
     </HashRouter>
   </React.StrictMode>
 );
