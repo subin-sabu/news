@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useContext} from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -6,13 +6,14 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { Link } from 'react-router-dom';
-import newsArray from '../Assets/news';
 import HomeAd16x9 from '../../Advertisements/HomeAd16x9';
 import NewsCard from '../NewsCard/NewsCard';
+import { NewsContext } from '../../Context/NewsContext'; // Adjust the import path if used in other components
 
 
 
 export default function MainNews({ className }) {
+  const newsArray = useContext(NewsContext); // Use context to get the news array
   return (
     <Box className={className} sx={{ marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center', justifyContent: 'space-around' }}>
       <Grid container
@@ -36,7 +37,7 @@ export default function MainNews({ className }) {
                   <CardMedia sx={{ width: '100%', maxWidth: '100%' }}
                     component="img"
                     height="auto"
-                    image={news.imageURL}
+                    image={news.imageUrl}
                     alt="news image"
                   />
                   <CardContent sx={{ height: '80%', display: 'flex', flexDirection: 'column' }}>

@@ -1,5 +1,5 @@
 import  React , { useContext } from 'react';
-import { NewsContext } from '../../Context/NewsContext'; // Adjust the import path to where your NewsContext is defined
+import { NewsContext } from '../../Context/NewsContext'; // Adjust the import path if used in other components
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -7,6 +7,36 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { useTheme } from '@emotion/react';
+
+
+//Calculating time for news cards
+function formatTimestamp(timestamp) {
+  const { seconds } = timestamp;
+  const newsDate = new Date(seconds * 1000); // Convert Firestore timestamp to JavaScript Date
+  const now = new Date();
+  const differenceInSeconds = (now - newsDate) / 1000;
+  const differenceInMinutes = differenceInSeconds / 60;
+  const differenceInHours = differenceInMinutes / 60;
+  const differenceInDays = differenceInHours / 24;
+
+  if (differenceInSeconds < 60) {
+    return 'Just now';
+  } else if (differenceInMinutes < 60) {
+    return `${Math.floor(differenceInMinutes)} minute${Math.floor(differenceInMinutes) === 1 ? '' : 's'} ago`;
+  } else if (differenceInHours < 2) {
+    return `1 hour ago`;
+  } else if (differenceInHours < 24) {
+    return `${Math.floor(differenceInHours)} hour${Math.floor(differenceInHours) === 1 ? '' : 's'} ago`;
+  } else if (differenceInDays < 2) {
+    return `1 day ago`;
+  } else {
+    return `${Math.floor(differenceInDays)} day${Math.floor(differenceInDays) === 1 ? '' : 's'} ago`;
+  }
+}
+
+
+
+
 
 export default function NewsCard({ startIndex, endIndex }) {
   const theme = useTheme();
@@ -33,7 +63,9 @@ export default function NewsCard({ startIndex, endIndex }) {
                 />
                 <CardContent sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <Typography gutterBottom variant="caption" color='text.secondary' component="div">
-                    {news.time}
+                  {formatTimestamp(news.timestamp)}
+                    
+                    
                   </Typography>
                   <Typography gutterBottom variant="body2" component="div" sx={{ mb: 1, fontWeight: '600'}}>
                     {news.title}
