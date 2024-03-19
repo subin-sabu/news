@@ -1,15 +1,16 @@
-import * as React from 'react';
+import  React, {useContext} from 'react';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { Grid, Paper } from '@mui/material';
 import {Box } from '@mui/system';
-import newsArray from '../Assets/news';
 import VideoContainer from '../iFrame Container/VideoContainer';
 import HomeAd1 from '../../Advertisements/HomeAd1';
+import { NewsContext } from '../../Context/NewsContext';
 
 
 
 export default function NewsElaborate() {
+  const newsArray = useContext(NewsContext);
   return (
     <Box sx={{ marginTop: '2rem' }}>
       <Grid container
@@ -38,7 +39,7 @@ export default function NewsElaborate() {
                   {news.title}
                 </Typography>
               </CardContent>
-              <VideoContainer videoURL={news.videoURL}/>
+              <VideoContainer videoURL={news.videoUrl}/>
 
               <CardContent sx={{ height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
                 <Typography gutterBottom variant="caption" color='text.secondary' component="div" >

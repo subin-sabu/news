@@ -1,54 +1,72 @@
 import React from "react";
 
-
 const VideoContainer = ({ videoURL }) => {
-  // Function to convert a YouTube URL to its embed URL format
-  const convertToEmbedURL = (url) => {
-    // Define a regular expression to extract the video ID from various YouTube URL formats
-    // This regex handles standard YouTube links, shortened youtu.be links, and embed links
-    const regExp = /^.*(youtu.be\/|v\/|e\/|u\/\w+\/|embed\/|v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-
-    // If a match is found and the second group (video ID) is exactly 11 characters long (the length of YouTube video IDs), use it
-    const videoID = match && match[2].length === 11 ? match[2] : null;
-    
-    // If a video ID was successfully extracted, construct the embed URL
-    if (videoID) {
-      return `https://www.youtube.com/embed/${videoID}?rel=0`; // The "?rel=0" parameter limits related content shown after the video plays
+  // Early check to ensure a URL is provided
+  if (!videoURL) {
+    return null;
+  }
+  
+  // Function to determine the type of video link and convert it if necessary
+  const processVideoURL = (url) => {
+    // YouTube URL in standard format
+    if (url.match(/watch\?v=([a-zA-Z0-9_-]+)/)) {
+      const id = url.split('v=')[1].split('&')[0]; // Extract the video ID
+      return `https://www.youtube.com/embed/${id}`;
     }
-
-    // If no recognizable YouTube URL format is detected, return the original URL
-    return url;
+    // YouTube URL in shortened format
+    else if (url.match(/youtu.be\/([a-zA-Z0-9_-]+)/)) {
+      const id = url.split('youtu.be/')[1].split('?')[0]; // Extract the video ID
+      return `https://www.youtube.com/embed/${id}`;
+    }
+    // Direct video link (assumes valid video URL from Firebase or similar)
+    else if (url.match(/\.(mp4|webm)$/)) {
+      return url;
+    }
+    // Not a valid video link
+    return null;
   };
 
-  // Convert the input video URL to the embed URL format
-  const embedURL = convertToEmbedURL(videoURL);
+  const processedURL = processVideoURL(videoURL);
 
+  if (!processedURL) {
+    return null;
+  }
 
+  const isYoutubeLink = processedURL.includes("youtube.com/embed/");
 
   return (
-    <div style={{
-      position: 'relative',
-      paddingBottom: '56.25%', // For a 16:9 aspect ratio
-      height: 0,
-      overflow: 'hidden'
-    }}>
-      <iframe
-        src={embedURL}
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          border: '0' // Removes the border
-        }}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-        title="Embedded video"
-      />
+    <div style={{ position: 'relative', paddingBottom: isYoutubeLink ? '56.25%' : '0', height: 0, overflow: 'hidden' }}>
+      {isYoutubeLink ? (
+        <iframe
+          src={processedURL}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            border: '0'
+          }}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="Embedded video"
+        />
+      ) : (
+        <video
+          controls
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+          }}
+          src={processedURL}
+          title="Video content"
+        />
+      )}
     </div>
   );
 };
 
-export default VideoContainer
+export default VideoContainer;
