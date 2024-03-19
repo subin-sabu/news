@@ -42,6 +42,8 @@ export default function NewsCard({ startIndex, endIndex }) {
   const theme = useTheme();
   const newsArray = useContext(NewsContext); // Use context to get the news array
 
+
+  console.log(newsArray)
   return (
     <Box>
       <Grid container

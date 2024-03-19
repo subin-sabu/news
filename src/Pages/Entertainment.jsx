@@ -1,8 +1,9 @@
 import React from 'react'
+import NewsElaborate from '../Components/NewsElaborate/NewsElaborate'
 
 function Entertainment() {
   return (
-    <div>Entertainment</div>
+    <div><NewsElaborate/></div>
   )
 }
 

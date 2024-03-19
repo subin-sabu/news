@@ -25,7 +25,7 @@ export default function MainNews({ className }) {
 
         {newsArray.slice(0, 1).map((news, index) => (
           <Grid item key={index} xs={12}    >
-            <Link to='/News' style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to={`/News/${news.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
               <Card sx={{ minWidth: 200, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <CardActionArea sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
 

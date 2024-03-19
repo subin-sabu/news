@@ -22,6 +22,7 @@ import NewsForm from './Components/NewsForm/NewsForm';
 
 
 
+
 function App() {
   return (
     <div>
@@ -31,7 +32,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='Home' element={<Home/>}/>
-        <Route path='/News' element={<News />} />
+        <Route path='/News/:id' element={<News />} />
         <Route path='/Entertainment' element={<Entertainment />} />
         <Route path='/Events' element={<Events />} />
         <Route path='/LifeStyle' element={<LifeStyle />} />
