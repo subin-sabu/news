@@ -7,6 +7,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { useTheme } from '@emotion/react';
+import {Link} from 'react-router-dom'
 
 
 //Calculating time for news cards
@@ -53,6 +54,7 @@ export default function NewsCard({ startIndex, endIndex }) {
         >
         {newsArray.slice(startIndex, endIndex).map((news, index) => (
           <Grid item key={index} spacing={1}>
+            <Link to={`/News/${news.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
             <Card sx={{ maxWidth: 500,
               [theme.breakpoints.up('sm')]: {maxWidth: 260},
               height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
@@ -75,6 +77,7 @@ export default function NewsCard({ startIndex, endIndex }) {
                 </CardContent>
               </CardActionArea>
             </Card>
+            </Link>
           </Grid>
         ))}
       </Grid>

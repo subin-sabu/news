@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { NewsContext } from '../../Context/NewsContext';
 import { db } from '../../firebase/config';
 import { Grid, Paper, CardContent, Typography, Box, } from '@mui/material';
@@ -8,9 +7,9 @@ import HomeAd1 from '../../Advertisements/HomeAd1';
 
 
 
-const NewsElaborate = () => {
+const NewsElaborate = ({id}) => {
   
-  const { id } = useParams();
+ 
   const newsArray = useContext(NewsContext);
   const [newsItem, setNewsItem] = useState(null);
   const [loading, setLoading] = useState(true);

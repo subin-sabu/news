@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import newsArray from '../Assets/news';
+import React, { useState, useContext } from 'react';
 import './NewsCardVertical.css';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import { NewsContext } from '../../Context/NewsContext';
+
+
 
 function NewsCardVertical({ startIndex, endIndex }) {
+  const newsArray = useContext(NewsContext);
+
   const [ripples, setRipples] = useState({});
 
   const addRipple = (index, event) => {
@@ -30,8 +34,9 @@ function NewsCardVertical({ startIndex, endIndex }) {
     <div className='news-container'>
       {newsArray.slice(startIndex, endIndex).map((news, index) => (
         <div key={index} className='card'>
-          <Link to='/Events' style={{ textDecoration: 'none', color: 'inherit' }} onClick={(event) => event.preventDefault()}>
-            <div className='news-card-content'
+        <Link to={`/News/${news.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+
+              <div className='news-card-content'
               onMouseDown={(event) => addRipple(index, event)}
               onMouseUp={() => removeRipple(index)}>
               {/* Ripple Element */}
@@ -52,7 +57,7 @@ function NewsCardVertical({ startIndex, endIndex }) {
                 />
               )}
               <div className='img-div'>
-                <img src={news.imageURL} alt="news" />
+                <img src={news.imageUrl} alt="news" />
               </div>
               <div className='news-content'>
                 <p>{news.time}</p>

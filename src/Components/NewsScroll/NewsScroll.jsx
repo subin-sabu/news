@@ -1,9 +1,13 @@
-import React from 'react';
+import React , { useContext }from 'react';
 import './NewsScroll.css';
-import newsArray from '../Assets/news'; 
+import { NewsContext } from '../../Context/NewsContext';
+
 
 
 function NewsScroll() {
+   
+  const newsArray = useContext(NewsContext);
+
   return (
     <div className='scroll-container'>
       <div className='scroll'>

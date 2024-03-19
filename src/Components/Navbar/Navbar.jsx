@@ -23,7 +23,7 @@ import ListItemText from '@mui/material/ListItemText';
 const isAuthenticated = () => false;
 const getUserProfile = () => ({ name: "John Doe", profilePic: "" });
 
-const pages = ['Home', 'News', 'Events', 'Entertainment', 'LifeStyle', 'Sports', 'Auto', 'Tech'];
+const pages = ['Home', 'Events', 'Entertainment', 'LifeStyle', 'Sports', 'Auto', 'Tech'];
 const settings = isAuthenticated() ? ['Profile', 'Account', 'Dashboard', 'Logout'] : ['Login', 'SignUp'];
 
 function Navbar() {
