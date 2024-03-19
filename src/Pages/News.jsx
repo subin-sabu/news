@@ -1,4 +1,4 @@
-import React from 'react'
+import React , { useEffect } from 'react'
 import NewsElaborate from '../Components/NewsElaborate/NewsElaborate'
 import NewsAd1 from '../Advertisements/NewsAd1'
 import { Grid, Box, Container } from '@mui/material'
@@ -8,6 +8,9 @@ import {useParams} from 'react-router-dom'
 function News() {
  const {id} = useParams(); //extract id from url
  
+ useEffect(() => {
+  window.scrollTo({top:0, behavior:'smooth'});
+ }, [id]); //scrolls to top of News Page when id changes
 
   return (
     <div>

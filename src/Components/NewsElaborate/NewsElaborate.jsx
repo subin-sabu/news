@@ -4,6 +4,7 @@ import { db } from '../../firebase/config';
 import { Grid, Paper, CardContent, Typography, Box, } from '@mui/material';
 import VideoContainer from '../iFrame Container/VideoContainer';
 import HomeAd1 from '../../Advertisements/HomeAd1';
+import { doc, getDoc } from 'firebase/firestore';
 
 
 
@@ -27,26 +28,33 @@ const NewsElaborate = ({id}) => {
   }, [id, newsArray]);
 
   const fetchNewsFromFirebase = async (newsId) => {
+    setLoading(true); // Show loading state
+  
     try {
-      const doc = await db.firestore().collection('news').doc(newsId).get();
-      if (doc.exists) {
-        setNewsItem({ id: doc.id, ...doc.data() });
+      const docRef = doc(db, 'news', newsId); // Get a reference to the document
+      const docSnap = await getDoc(docRef); // Attempt to fetch the document
+  
+      if (docSnap.exists()) {
+        setNewsItem({ id: docSnap.id, ...docSnap.data() }); // If the document exists, update the state
       } else {
         console.log("No such document!");
-        setNewsItem(null);
+        setNewsItem(null); // If no document is found, set newsItem to null
       }
     } catch (error) {
-      console.error("Error getting document:", error);
+      console.error("Error getting document:", error); // Log any errors
+      setNewsItem(null); // Ensure newsItem is set to null on error
     }
-    setLoading(false);
+  
+    setLoading(false); // Hide loading state
   };
+  
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (!newsItem) {
-    return <div>News not found 😞</div>;
+    return <div style={{fontSize:'20px'}}><br /><br />News not found 😞<br /><br /></div>;
   }
 
   return (
