@@ -9,7 +9,6 @@ import Entertainment from './Pages/Entertainment';
 import Events from './Pages/Events';
 import LifeStyle from './Pages/LifeStyle';
 import Sports from './Pages/Sports';
-import Auto from './Pages/Auto';
 import Tech from './Pages/Tech';
 import TopNav from './Components/Navbar/TopNav';
 import Footer from './Components/Footer/Footer';
@@ -18,6 +17,7 @@ import UserSignUp from './Pages/UserSignUp';
 import UserLogin from './Pages/UserLogin';
 import ResetPassword from './Pages/ResetPassword';
 import NewsForm from './Components/NewsForm/NewsForm';
+import NewsManager from './Pages/NewsManager';
 
 
 
@@ -38,7 +38,7 @@ function App() {
         <Route path='/LifeStyle' element={<LifeStyle />} />
         <Route path='/Sports' element={<Sports />} />
         <Route path='/Tech' element={<Tech />} />
-        <Route path='/Auto' element={<Auto />} />
+        <Route path='/NewsManager' element={<NewsManager />} />
         <Route path='/SignUp' element={<UserSignUp/>} />
         <Route path='/Login' element= {<UserLogin/>} />
         <Route path='/Forgot' element= {<ResetPassword/>} />

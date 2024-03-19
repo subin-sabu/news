@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React , {useContext} from 'react';
+import { NewsContext } from '../../Context/NewsContext';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardActionArea from '@mui/material/CardActionArea';
@@ -9,9 +10,8 @@ import { Link } from 'react-router-dom';
 import IconButton from '@mui/material/IconButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import { styled, useTheme } from '@mui/material/styles';
-import newsArray from '../Assets/news';
-import { Hidden } from '@mui/material';
+import { styled } from '@mui/material/styles';
+
 
 const InfiniteScrollContainer = styled(Box)(({ theme }) => ({
   overflowX: 'hidden',
@@ -47,7 +47,9 @@ const ScrollContent = styled('div')(({ theme }) => ({
 }));
 
 export default function NewsCardScroll({ startIndex, endIndex }) {
-  const theme = useTheme();
+  
+  const newsArray = useContext(NewsContext);
+
   const scrollRef = React.useRef(null);
   const [isHovering, setIsHovering] = React.useState(false);
 
@@ -93,10 +95,10 @@ export default function NewsCardScroll({ startIndex, endIndex }) {
       >
         {doubledNewsArray.map((news, index) => (
           <Box key={index} sx={{ maxWidth: 260, flexShrink: 0, m: 1, textDecoration: 'none' }}>
-            <Link to="#" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <Link to={`/News/${news.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <CardActionArea sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <CardMedia component="img" height="140" image={news.imageURL} alt="news image" />
+                  <CardMedia component="img" height="140" image={news.imageUrl} alt="news image" />
                   <CardContent>
                     <Typography gutterBottom variant="caption" color="text.secondary">
                       {news.time}

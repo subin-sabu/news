@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { collection, getFirestore, query, orderBy, limit, getDocs } from 'firebase/firestore';
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 
 // Firebase app initialization
 // Assume you've already initialized Firebase elsewhere in your app
@@ -14,7 +14,7 @@ export const NewsProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchNews = async () => {
-      const db = getFirestore();
+      
       // Query to fetch the last 15 news items, ordered by their document ID (timestamp) in descending order
       const newsRef = collection(db, 'news');
       const q = query(newsRef, orderBy('timestamp', 'desc'), limit(15));
