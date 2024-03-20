@@ -35,7 +35,7 @@ const VideoContainer = ({ videoURL }) => {
   const isYoutubeLink = processedURL.includes("youtube.com/embed/");
 
   return (
-    <div style={{ position: 'relative', paddingBottom: isYoutubeLink ? '56.25%' : '0', height: 0, overflow: 'hidden' }}>
+    <div style={{ position: 'relative', paddingBottom: isYoutubeLink ? '56.25%' : '0', height: 0, overflow: 'hidden' , marginTop:'2rem'}}>
       {isYoutubeLink ? (
         <iframe
           src={processedURL}

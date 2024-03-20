@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NewsContext } from '../../Context/NewsContext';
 import { db } from '../../firebase/config';
-import { Grid, Paper, CardContent, Typography, Box, } from '@mui/material';
+import { Grid, Paper, CardContent, Typography, Box, CardMedia, } from '@mui/material';
 import VideoContainer from '../iFrame Container/VideoContainer';
 import HomeAd1 from '../../Advertisements/HomeAd1';
 import { doc, getDoc } from 'firebase/firestore';
@@ -9,8 +9,7 @@ import { doc, getDoc } from 'firebase/firestore';
 
 
 const NewsElaborate = ({id}) => {
-  
- 
+   
   const newsArray = useContext(NewsContext);
   const [newsItem, setNewsItem] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -78,19 +77,32 @@ const NewsElaborate = ({id}) => {
             {newsItem.title}
           </Typography>
         </CardContent>
-        <VideoContainer videoURL={newsItem.videoUrl} />
-
+        <CardMedia sx={{ width: '100%', maxWidth: '100%' }}
+                    component="img"
+                    height="auto"
+                    image={newsItem.imageUrl}
+                    alt="news image"
+                  />
+        
         <CardContent sx={{ height: '80%', display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
           <Typography gutterBottom variant="caption" color='text.secondary' component="div" >
+           
             {newsItem.time}
+                   
           </Typography>
 
           <Typography variant="body2" color="text.secondary" fontWeight={8} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical' }}>
+          
             {newsItem.description1}
+            
+            
+            </Typography>
+          <VideoContainer videoURL={newsItem.videoUrl} />
+          <Typography variant="body2" color="text.secondary" fontWeight={8} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical' }}>
             <br />
-            <br />
-            {newsItem.description2}
+             {newsItem.description2}
           </Typography>
+
           <HomeAd1 />
           <Typography variant="body2" color="text.secondary" fontWeight={8} sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitBoxOrient: 'vertical' }}>
             <br />
