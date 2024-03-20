@@ -8,7 +8,6 @@ import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -24,7 +23,7 @@ const isAuthenticated = () => false;
 const getUserProfile = () => ({ name: "John Doe", profilePic: "" });
 
 const pages = ['Home', 'Events', 'Entertainment', 'LifeStyle', 'Sports', 'Auto', 'Tech'];
-const settings = isAuthenticated() ? ['Profile', 'Account', 'Dashboard', 'Logout'] : ['Login', 'SignUp'];
+const settings = isAuthenticated() ? ['Profile', 'Account', 'Dashboard', 'Logout'] : ['Login'];
 
 function Navbar() {
   const navigate = useNavigate();

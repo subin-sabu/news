@@ -5,7 +5,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@mui/material/styles';
-import Theme from './Theme'
+import  theme from './Theme'
 import {NewsProvider} from './Context/NewsContext'
 import { AuthProvider } from './Context/AuthContext';
 
@@ -15,7 +15,7 @@ root.render(
     <HashRouter>
       <AuthProvider>
       <NewsProvider>
-      <ThemeProvider theme={Theme}>
+      <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
       </NewsProvider>

@@ -17,7 +17,7 @@ export const NewsProvider = ({ children }) => {
       
       // Query to fetch the last 15 news items, ordered by their document ID (timestamp) in descending order
       const newsRef = collection(db, 'news');
-      const q = query(newsRef, orderBy('timestamp', 'desc'), limit(15));
+      const q = query(newsRef, orderBy('timestamp', 'desc'), limit(13));
       
       const querySnapshot = await getDocs(q);
       const newsItems = [];

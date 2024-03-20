@@ -10,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
+import { Link } from 'react-router-dom';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -58,6 +59,7 @@ export default function TopNav() {
     <Box sx={{ flexGrow: 1 }} >
       <AppBar position="static">
         <Toolbar>
+          <Link to='https://youtube.com/@ReachMalayalam?si=WPs_Yf-j2thMGZet' style={{textDecoration:'none', color:'inherit'}}>
           <IconButton
             size="large"
             edge="start"
@@ -69,6 +71,8 @@ export default function TopNav() {
             <YouTubeIcon/>
       
           </IconButton>
+          </Link>
+          
           <Typography
             variant="body1"
             noWrap
