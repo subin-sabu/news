@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {useAuth} from '../../Context/AuthContext'
 import {
   Button,
   FormControl,
@@ -14,7 +15,10 @@ import {
 } from '@mui/material';
 import { collection, doc, setDoc } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { db } from '../../firebase/config'; // Assuming db is correctly initialized elsewhere
+import { db } from '../../firebase/config'; //  db is correctly initialized in config file
+import Resizer from 'react-image-file-resizer';
+
+
 
 // Initialize Storage
 const storage = getStorage();
@@ -48,6 +52,11 @@ const NewsForm = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
+  //current user info is taken to get reporter's email
+  const { currentUser } = useAuth();
+  // console.log(currentUser.email)
+  
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -84,6 +93,31 @@ const NewsForm = () => {
     setOpenSnackbar(false);
   };
 
+  //  function for resizing and uploading images
+  
+  const resizeFile = (file) =>
+  new Promise((resolve) => {
+    Resizer.imageFileResizer(
+      file,
+      200, // maxWidth
+      150, // maxHeight
+      'JPEG', // compressFormat
+      100, // quality
+      0, // rotation
+      (uri) => {
+        resolve(uri);
+      },
+      'file', // outputType
+    );
+  });
+
+
+    const uploadResizedFile = async (file, path) => {
+      if (!file) return null;
+      const resizedImage = await resizeFile(file);
+      return uploadFile(resizedImage, `${path}/thumbnails`);
+    };
+
   const uploadFile = async (file, path) => {
     if (!file) return null;
     setLoading(true);
@@ -98,9 +132,18 @@ const NewsForm = () => {
     e.preventDefault();
     setLoading(true);
 
+    let thumbnailUrl = null;
+
     const imageUrl = formValues.imageUrlOption === 'upload' && formValues.imageFile
       ? await uploadFile(formValues.imageFile, 'images')
       : formValues.imageUrl || null;
+
+     // Only resize and upload if imageFile exists
+     if (formValues.imageFile && formValues.imageUrlOption === 'upload') {
+      thumbnailUrl = await uploadResizedFile(formValues.imageFile, 'images');
+    }
+
+
     const videoUrl = formValues.videoUrlOption === 'upload' && formValues.videoFile
       ? await uploadFile(formValues.videoFile, 'videos')
       : formValues.videoUrl || null;
@@ -108,6 +151,7 @@ const NewsForm = () => {
     const newsData = {
       ...formValues,
       imageUrl,
+      thumbnailUrl,
       videoUrl,
       timestamp: new Date(),
       tags: formValues.tags ? formValues.tags.split(',').map(tag => tag.trim()) : [],
@@ -116,6 +160,7 @@ const NewsForm = () => {
       title: formValues.title || null,
       category: formValues.category || null,
       reporterName: formValues.reporterName || null,
+      reporterEmail: currentUser.email,
       imageCredit: formValues.imageCredit || null,
       videoCredit: formValues.videoCredit || null,
       description1: formValues.description1 || null,

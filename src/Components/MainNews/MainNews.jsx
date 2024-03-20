@@ -15,7 +15,8 @@ import { NewsContext } from '../../Context/NewsContext'; // Adjust the import pa
 export default function MainNews({ className }) {
   const newsArray = useContext(NewsContext); // Use context to get the news array
   return (
-    <Box className={className} sx={{ marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center', justifyContent: 'space-around' }}>
+    <Box className={className} sx={{ marginTop: '0.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center', justifyContent: 'space-around', 
+      }}>
       <Grid container
         rowSpacing={{ xs: 1 }}
         columnSpacing={{ xs: 1 }}
