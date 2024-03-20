@@ -15,7 +15,7 @@ function Home() {
 
   return (
     <div>
-      <Container>
+      <Container >
         <HomeAd1 />
         <div className='grid-container'>
           <div className='snippet1' >
