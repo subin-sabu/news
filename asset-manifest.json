@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.90649cfb.css",
-    "main.js": "/static/js/main.1ca9854b.js",
+    "main.js": "/static/js/main.66b1971c.js",
     "static/js/453.d855a71b.chunk.js": "/static/js/453.d855a71b.chunk.js",
     "static/media/HomAd1.gif": "/static/media/HomAd1.40a8de4afe311a6fbed9.gif",
     "static/media/kerala_vision_ad.jpeg": "/static/media/kerala_vision_ad.5f1a1a47f3fdfad765f3.jpeg",
     "static/media/reach.PNG": "/static/media/reach.90ba50d7d9cdaa9be149.PNG",
     "index.html": "/index.html",
     "main.90649cfb.css.map": "/static/css/main.90649cfb.css.map",
-    "main.1ca9854b.js.map": "/static/js/main.1ca9854b.js.map",
+    "main.66b1971c.js.map": "/static/js/main.66b1971c.js.map",
     "453.d855a71b.chunk.js.map": "/static/js/453.d855a71b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.90649cfb.css",
-    "static/js/main.1ca9854b.js"
+    "static/js/main.66b1971c.js"
   ]
 }
