@@ -7,16 +7,19 @@ import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@mui/material/styles';
 import Theme from './Theme'
 import {NewsProvider} from './Context/NewsContext'
+import { AuthProvider } from './Context/AuthContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <HashRouter>
+      <AuthProvider>
       <NewsProvider>
       <ThemeProvider theme={Theme}>
         <App />
       </ThemeProvider>
       </NewsProvider>
+      </AuthProvider>
     </HashRouter>
   </React.StrictMode>
 );

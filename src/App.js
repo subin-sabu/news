@@ -13,11 +13,11 @@ import Tech from './Pages/Tech';
 import TopNav from './Components/Navbar/TopNav';
 import Footer from './Components/Footer/Footer';
 import NewsScroll from './Components/NewsScroll/NewsScroll';
-import UserSignUp from './Pages/UserSignUp';
-import UserLogin from './Pages/UserLogin';
-import ResetPassword from './Pages/ResetPassword';
-import NewsForm from './Components/NewsForm/NewsForm';
 import NewsManager from './Pages/NewsManager';
+import Admin from './Pages/Admin';
+import ProtectedRoute from './Components/ProtectedRoute';
+import Login from './Components/Admin Login/Login';
+import ReportNews from './Pages/ReportNews';
 
 
 
@@ -26,26 +26,28 @@ import NewsManager from './Pages/NewsManager';
 function App() {
   return (
     <div>
-      
+
       <Navbar />
-      <TopNav/>
+      <TopNav />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='Home' element={<Home/>}/>
+        <Route path='Home' element={<Home />} />
         <Route path='/News/:id' element={<News />} />
         <Route path='/Entertainment' element={<Entertainment />} />
         <Route path='/Events' element={<Events />} />
         <Route path='/LifeStyle' element={<LifeStyle />} />
         <Route path='/Sports' element={<Sports />} />
         <Route path='/Tech' element={<Tech />} />
-        <Route path='/NewsManager' element={<NewsManager />} />
-        <Route path='/SignUp' element={<UserSignUp/>} />
-        <Route path='/Login' element= {<UserLogin/>} />
-        <Route path='/Forgot' element= {<ResetPassword/>} />
-        <Route path='/ReportNews' element= {<NewsForm/>} />
+        <Route path='/login' element={<Login/>} />
+        {/* Protected route wrap for admin routes */}
+        <Route path='/Admin' element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+        <Route path='/ReportNews' element={<ProtectedRoute><ReportNews/></ProtectedRoute>} />
+        <Route path='/NewsManager' element={<ProtectedRoute><NewsManager /></ProtectedRoute>} />
+        
+
       </Routes>
-      <Footer/>
-    <NewsScroll/>
+      <Footer />
+      <NewsScroll />
     </div>
   );
 }
