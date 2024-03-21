@@ -11,6 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { styled } from '@mui/material/styles';
+import './NewsCard.css'
 
 
 const InfiniteScrollContainer = styled(Box)(({ theme }) => ({
@@ -73,6 +74,31 @@ export default function NewsCardScroll({ startIndex, endIndex }) {
     return () => clearInterval(intervalId);
   }, [isHovering]);
 
+  //Calculating time for news cards
+function formatTimestamp(timestamp) {
+  const { seconds } = timestamp;
+  const newsDate = new Date(seconds * 1000); // Convert Firestore timestamp to JavaScript Date
+  const now = new Date();
+  const differenceInSeconds = (now - newsDate) / 1000;
+  const differenceInMinutes = differenceInSeconds / 60;
+  const differenceInHours = differenceInMinutes / 60;
+  const differenceInDays = differenceInHours / 24;
+
+  if (differenceInSeconds < 60) {
+    return 'Just now';
+  } else if (differenceInMinutes < 60) {
+    return `${Math.floor(differenceInMinutes)} minute${Math.floor(differenceInMinutes) === 1 ? '' : 's'} ago`;
+  } else if (differenceInHours < 2) {
+    return `1 hour ago`;
+  } else if (differenceInHours < 24) {
+    return `${Math.floor(differenceInHours)} hour${Math.floor(differenceInHours) === 1 ? '' : 's'} ago`;
+  } else if (differenceInDays < 2) {
+    return `1 day ago`;
+  } else {
+    return `${Math.floor(differenceInDays)} day${Math.floor(differenceInDays) === 1 ? '' : 's'} ago`;
+  }
+}
+
   return (
     <InfiniteScrollContainer
       onMouseEnter={() => setIsHovering(true)}
@@ -98,12 +124,12 @@ export default function NewsCardScroll({ startIndex, endIndex }) {
             <Link to={`/News/${news.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
               <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                 <CardActionArea sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <CardMedia component="img" height="140" image={news.imageUrl} alt="news image" />
+                  <CardMedia component="img" height="140" image={news.thumbnailUrl} alt="news image" />
                   <CardContent>
                     <Typography gutterBottom variant="caption" color="text.secondary">
-                      {news.time}
+                    {formatTimestamp(news.timestamp)}
                     </Typography>
-                    <Typography gutterBottom variant="body2" sx={{ fontWeight: '600'}}>
+                    <Typography className='title-line-clamp' gutterBottom variant="body2" sx={{ fontWeight: '600'}}>
                       {news.title}
                     </Typography>
                   </CardContent>

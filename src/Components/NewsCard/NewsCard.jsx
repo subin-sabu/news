@@ -63,7 +63,7 @@ export default function NewsCard({ startIndex, endIndex }) {
                 <CardMedia
                   component="img"
                   height="140"
-                  image={news.imageUrl}
+                  image={news.thumbnailUrl}
                   alt="news image"
                 />
                 <CardContent sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
