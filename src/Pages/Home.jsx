@@ -18,16 +18,16 @@ function Home() {
       <Container >
         <HomeAd1 />
         <div className='grid-container'>
-          <div className='snippet1' >
-            <Typography gutterBottom fontSize={20} fontWeight={600} color='primary.sub' style={{ display: 'flex', justifyContent: 'flex-start', gap: '.7rem' }}><ArrowCircleRightIcon />Latest News</Typography>
-            <NewsCardVertical startIndex={1} endIndex={7} />
-          </div>
+        
+            
+            <NewsCardVertical startIndex={1} endIndex={7} heading='Latest News' className='snippet1'/>
+       
 
           <MainNews className='main' />
-          <div className='snippet2'>
-            <Typography gutterBottom fontSize={20} fontWeight={600} color='primary.sub' style={{ display: 'flex', justifyContent: 'flex-start', gap: '.7rem' }}><ArrowCircleRightIcon /> Must Read</Typography>
-            <NewsCardVertical startIndex={7} endIndex={13} />
-          </div>
+         
+            
+            <NewsCardVertical startIndex={7} endIndex={13} heading='Must Read' className='snippet2' />
+        
 
           <Box className='ad2' sx={{ width: '100%', display: { xs: 'block', sm: 'none' } }}>
             <HomeAd16x9 />

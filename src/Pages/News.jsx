@@ -26,8 +26,8 @@ function News() {
             </Box>
           </Grid>
           <Grid item xs={12} md={4} sx={{display:'flex', flexDirection:'column', marginTop:'25px' }}>
-          <Typography gutterBottom fontSize={20} fontWeight={600} color='primary.sub' style={{ display: 'flex', justifyContent: 'flex-start', gap: '.7rem' }}><ArrowCircleRightIcon />Recent updates</Typography>
-            <NewsCardVertical startIndex={1} endIndex={13}/>
+          
+            <NewsCardVertical startIndex={1} endIndex={13} heading='Recent Updates'/>
           </Grid>
         </Grid>
 
