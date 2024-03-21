@@ -12,7 +12,7 @@ export default function BasicBreadcrumbs({page}) {
   return (
     <div role="presentation" onClick={handleClick}>
       <Breadcrumbs aria-label="breadcrumb" >
-        <Link to="/" style={{color:'inherit'}}>
+        <Link to="/" style={{color:'inherit', textDecoration:'none', }}>
           Home
         </Link>
         <Typography color="text.primary">{page}</Typography>

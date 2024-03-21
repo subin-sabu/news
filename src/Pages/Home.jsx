@@ -6,7 +6,7 @@ import MainNews from '../Components/MainNews/MainNews';
 import NewsCardVertical from '../Components/NewsCard/NewsCardVertical';
 import HomeAd16x9 from '../Advertisements/HomeAd16x9';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
-
+import Breadcrumbs from '../Components/Breadcrumbs/Breadcrumbs'
 
 
 
@@ -17,6 +17,7 @@ function Home() {
     <div>
       <Container >
         <HomeAd1 />
+        
         <div className='grid-container'>
         
             

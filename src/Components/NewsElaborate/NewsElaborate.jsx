@@ -84,7 +84,7 @@ const NewsElaborate = ({id}) => {
   }
   
   return (
-    <Box sx={{ marginTop: '2rem' }}>
+    <Box sx={{ marginTop: '.5rem' }}>
       <Paper sx={{ maxWidth: '100%', height: '100%', display: 'flex', flexDirection: 'column', backgroundColor: 'white', alignContent: 'center' }}>
 
 
