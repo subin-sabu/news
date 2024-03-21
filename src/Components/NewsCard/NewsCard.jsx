@@ -8,6 +8,7 @@ import { CardActionArea, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { useTheme } from '@emotion/react';
 import {Link} from 'react-router-dom'
+import './NewsCard.css'
 
 
 //Calculating time for news cards
@@ -71,7 +72,8 @@ export default function NewsCard({ startIndex, endIndex }) {
                     
                     
                   </Typography>
-                  <Typography gutterBottom variant="body2" component="div" sx={{ mb: 1, fontWeight: '600'}}>
+                  
+                  <Typography className='title-line-clamp' gutterBottom variant="body2" component="div" sx={{ mb: 1, fontWeight: '600',}}>
                     {news.title}
                   </Typography>
                 </CardContent>

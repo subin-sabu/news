@@ -1,0 +1,8 @@
+.title-line-clamp{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* Number of lines you want to display */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%; /* or a specific width; ensure it has a width set */
+}
