@@ -8,7 +8,7 @@ import { CardActionArea, Grid } from '@mui/material';
 import { Box } from '@mui/system';
 import { useTheme } from '@emotion/react';
 import {Link} from 'react-router-dom'
-import './NewsCard.css'
+import styles from './NewsCard.module.css'
 
 
 //Calculating time for news cards
@@ -37,52 +37,51 @@ function formatTimestamp(timestamp) {
 }
 
 
-
-
-
-export default function NewsCard({ startIndex, endIndex }) {
+export default function NewsCard({ startIndex, endIndex, className, imageType }) {
   const theme = useTheme();
   const newsArray = useContext(NewsContext); // Use context to get the news array
 
-
-  console.log(newsArray)
   return (
-    <Box>
+    <Box className={className} >
       <Grid container
         rowSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
         columnSpacing={{ xs: 1, sm: 2, md: 3, lg: 4 }}
         justifyContent='center'
         >
-        {newsArray.slice(startIndex, endIndex).map((news, index) => (
-          <Grid item key={index} spacing={1}>
-            <Link to={`/News/${news.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <Card sx={{ maxWidth: 500,
-              [theme.breakpoints.up('sm')]: {maxWidth: 260},
-              height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <CardActionArea sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={news.thumbnailUrl}
-                  alt="news image"
-                />
-                <CardContent sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <Typography gutterBottom variant="caption" color='text.secondary' component="div">
-                  {formatTimestamp(news.timestamp)}
-                    
-                    
-                  </Typography>
-                  
-                  <Typography className='title-line-clamp' gutterBottom variant="body2" component="div" sx={{ mb: 1, fontWeight: '600',}}>
-                    {news.title}
-                  </Typography>
-                </CardContent>
-              </CardActionArea>
-            </Card>
-            </Link>
-          </Grid>
-        ))}
+        {newsArray.slice(startIndex, endIndex).map((news, index) => {
+          // Decide the image URL based on the `imageType` prop for each news item
+          const imageUrl = news[imageType === 'image' ? 'imageUrl' : 'thumbnailUrl'];
+
+          return (
+            <Grid item key={index} spacing={1}>
+              <Link to={`/News/${news.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <Card sx={{ maxWidth: 500,
+                  [theme.breakpoints.up('sm')]: {maxWidth: 260},
+                  height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <CardActionArea sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <CardMedia
+                      component="img"
+                      height="140"
+                      image={imageUrl}
+                      alt="news image"
+                    />
+                    <CardContent sx={{ height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                      <Typography gutterBottom variant="caption" color='text.secondary' component="div">
+                        {formatTimestamp(news.timestamp)}
+                      </Typography>
+                      
+                      <Typography className={styles['title-line-clamp']} gutterBottom variant="body2" component="div" sx={{ mb: 1, fontWeight: '600',}}>
+                        {news.title}
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                </Card>
+              </Link>
+            </Grid>
+          );
+        })}
       </Grid>
     </Box>
   );
 }
+

@@ -86,11 +86,11 @@ function formatTimestamp(timestamp) {
 
       {/* Optional Sections based on different viewports */}
 
-      <Box sx={{ width: '100%', display: { xs: 'block', sm: 'none' } }}>
+      {/* <Box sx={{ width: '100%', display: { xs: 'block', sm: 'none' } }}>
       <Link to='/News' style={{ textDecoration: 'none', color: 'inherit' }}>
         <NewsCard startIndex={0} endIndex={1}/>
       </Link>
-      </Box>
+      </Box> */}
 
       <Box sx={{ width: '100%', display: { xs: 'none', sm: 'block' } }}>
         <HomeAd16x9 />

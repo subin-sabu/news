@@ -1,0 +1,72 @@
+
+/* grid areas */
+.snippet1 { grid-area: snippet1; }
+.main { grid-area: main; }
+.snippet2 { grid-area: snippet2; }
+.ad2 { grid-area: ad2;}
+.snippet1reduced {grid-area: snippet1reduced;}
+.newsCard {grid-area: newsCard;}
+
+
+
+
+/* desktop view / DEFAULT VIEW */
+.grid-container{
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 1fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "snippet1 main snippet2";
+  grid-gap: 0.5rem;
+}
+
+
+.ad2{
+  display: none;
+}
+.snippet1reduced{
+  display: none;
+}
+.newsCard{
+  display: none;
+}
+
+
+
+/* tablet view */
+@media only screen and (max-width: 1079px) {
+  .grid-container{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto ;
+    grid-template-areas: 
+      "main snippet1reduced" ;
+  }
+  .snippet1,.snippet2{
+    display: none;
+  }
+  .snippet1reduced{
+    display: block;
+  }
+  
+ 
+
+}
+
+/* mobile view */
+@media only screen and (max-width: 600px) {
+  .grid-container{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas: 
+      "newsCard" 
+      "snippet1"
+      "ad2" 
+      "snippet2";
+  }
+  .newsCard, .snippet1, .snippet2{
+    display: block;
+  }
+  .snippet1reduced{
+    display: none;
+  }
+}

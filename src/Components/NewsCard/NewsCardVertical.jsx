@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import './NewsCardVertical.css';
+import styles from  './NewsCardVertical.module.css';
 import { Link } from 'react-router-dom'
 import { NewsContext } from '../../Context/NewsContext';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
@@ -7,7 +7,7 @@ import { Typography } from '@mui/material';
 
 
 
-function NewsCardVertical({ startIndex, endIndex, heading }) {
+function NewsCardVertical({ startIndex, endIndex, heading , className}) {
   const newsArray = useContext(NewsContext);
 
   const [ripples, setRipples] = useState({});
@@ -58,20 +58,20 @@ function formatTimestamp(timestamp) {
 
 
   return (
-
-    <div className='news-container'>
+<div className={className}>
+    <div className={styles['news-container']}>
       <Typography gutterBottom fontSize={20} fontWeight={600} color='primary.sub' style={{ display: 'flex', justifyContent: 'flex-start', gap: '.7rem', alignSelf:'flex-start'}}><ArrowCircleRightIcon />{heading}</Typography>
       {newsArray.slice(startIndex, endIndex).map((news, index) => (
-        <div key={index} className='card'>
+        <div key={index} className={styles.card}>
         <Link to={`/News/${news.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
 
-              <div className='news-card-content'
+              <div className={styles['news-card-content']}
               onMouseDown={(event) => addRipple(index, event)}
               onMouseUp={() => removeRipple(index)}>
               {/* Ripple Element */}
               {ripples[index] && (
                 <span
-                  className="ripple"
+                  className={styles.ripple}
                   style={{
                     left: `${ripples[index].x}px`,
                     top: `${ripples[index].y}px`,
@@ -85,10 +85,10 @@ function formatTimestamp(timestamp) {
                   }}
                 />
               )}
-              <div className='img-div'>
+              <div className={styles['img-div']}>
                 <img src={news.thumbnailUrl} alt="news" />
               </div>
-              <div className='news-content'>
+              <div className={styles['news-content']}>
                 <p >{formatTimestamp(news.timestamp)}</p>
                 <h5>{news.title}</h5>
               </div>
@@ -96,6 +96,7 @@ function formatTimestamp(timestamp) {
           </Link>
         </div>
       ))}
+    </div>
     </div>
 
   );

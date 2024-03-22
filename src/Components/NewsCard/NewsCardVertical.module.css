@@ -8,6 +8,8 @@
   min-width: 200px;
   max-width: 100%;
   align-items: center;
+  height: 100%;
+  
   }
 
 .news-container a{

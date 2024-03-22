@@ -6,7 +6,7 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 
 function Footer() {
   return (
-    <Box style={{ backgroundColor: '#181818', color: 'white' }}>
+    <Box style={{ backgroundColor: '#181818', color: 'white', marginTop:'1rem'}}>
       <Container >
         <div style={{ display: 'flex', justifyContent: 'center', flexFlow: 'row wrap', paddingTop: '2rem' }}>
           ©2024, Reach Media. All Rights Reserved.

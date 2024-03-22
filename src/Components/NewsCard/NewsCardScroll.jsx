@@ -11,7 +11,7 @@ import IconButton from '@mui/material/IconButton';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { styled } from '@mui/material/styles';
-import './NewsCard.css'
+import styles from './NewsCard.module.css'
 
 
 const InfiniteScrollContainer = styled(Box)(({ theme }) => ({
