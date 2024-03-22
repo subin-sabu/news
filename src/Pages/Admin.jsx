@@ -1,10 +1,13 @@
 import React from 'react'
+import AdminPage from '../Components/Admin Page/AdminPage'
 
 
 
 function Admin() {
   return (
-    <div><h1>Admin Page</h1></div>
+    <div>
+      <AdminPage/>
+      </div>
   )
 }
 
