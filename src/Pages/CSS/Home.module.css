@@ -62,8 +62,9 @@
       "snippet1"
       "ad2" 
       "snippet2";
+    
   }
-  .newsCard, .snippet1, .snippet2{
+  .newsCard, .snippet1, .snippet2, .ad2{
     display: block;
   }
   .snippet1reduced{
