@@ -4,9 +4,8 @@
 .main { grid-area: main; }
 .snippet2 { grid-area: snippet2; }
 .ad2 { grid-area: ad2;}
-.snippet1reduced {grid-area: snippet1reduced;}
 .newsCard {grid-area: newsCard;}
-
+.newsCardTab {grid-area: newsCardTab;}
 
 
 
@@ -21,15 +20,12 @@
 }
 
 
-.ad2{
+.ad2, .newsCard,.newsCardTab{
   display: none;
 }
-.snippet1reduced{
-  display: none;
-}
-.newsCard{
-  display: none;
-}
+
+
+
 
 
 
@@ -37,16 +33,19 @@
 @media only screen and (max-width: 1079px) {
   .grid-container{
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto ;
+    grid-template-rows: auto auto;
     grid-template-areas: 
-      "main snippet1reduced" ;
+      "main snippet1" 
+      "newsCardTab newsCardTab";
   }
-  .snippet1,.snippet2{
-    display: none;
-  }
-  .snippet1reduced{
+
+  .snippet1, .main, .newsCardTab{
     display: block;
   }
+  .snippet2, .ad2, .newsCard{
+    display: none;
+  }
+  
   
  
 
@@ -62,12 +61,13 @@
       "snippet1"
       "ad2" 
       "snippet2";
+    grid-gap: 0;
     
   }
   .newsCard, .snippet1, .snippet2, .ad2{
     display: block;
   }
-  .snippet1reduced{
+  .newsCardTab, .main{
     display: none;
   }
 }
