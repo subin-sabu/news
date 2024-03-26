@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
-import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 import { db } from '../firebase/config';
+import { collection, query, orderBy, limit, getDocs } from 'firebase/firestore';
 
 // Create Context
 export const NewsContext = createContext();
@@ -24,24 +24,30 @@ export const NewsProvider = ({ children }) => {
         });
 
         setNews(newsItems);
-
-        // If no news items were fetched, try fetching again
+        console.log(newsItems);
+        
         if (newsItems.length === 0 && attempt < 3) { // Limit the number of attempts to avoid infinite loops
-          console.log(`Attempt ${attempt + 1}: No news found, retrying...`);
-          setAttempt(attempt + 1);
+          setTimeout(() => {
+            console.log(`Attempt ${attempt + 1}: No news found, retrying...`);
+            setAttempt(attempt + 1);
+          }, 1000); // Wait for 1000ms before retrying
         } else if (attempt >= 3) {
-          // After several attempts, consider more drastic measures or logging
           console.error("Failed to fetch news after multiple attempts.");
-          // Consider showing an error message or providing a manual refresh option to the user here
         }
 
       } catch (error) {
         console.error("An error occurred while fetching news:", error);
-        // Handle error (e.g., by showing a message to the user)
       }
     };
 
     fetchNews();
+
+    // Cleanup function to clear the timeout
+    return () => {
+      if (attempt < 3) {
+        clearTimeout();
+      }
+    };
   }, [attempt]); // Rerun effect when `attempt` changes, up to the limit set
 
   return (

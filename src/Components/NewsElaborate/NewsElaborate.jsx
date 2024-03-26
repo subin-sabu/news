@@ -1,60 +1,72 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { NewsContext } from '../../Context/NewsContext';
 import { db } from '../../firebase/config';
-import { Grid, Paper, CardContent, Typography, Box, CardMedia, } from '@mui/material';
+import { Grid, Paper, CardContent, Typography, Box, CardMedia } from '@mui/material';
 import VideoContainer from '../iFrame Container/VideoContainer';
 import HomeAd1 from '../../Advertisements/HomeAd1';
 import { doc, getDoc } from 'firebase/firestore';
 
-
-
-const NewsElaborate = ({id}) => {
-   
+const NewsElaborate = ({ id }) => {
   const newsArray = useContext(NewsContext);
   const [newsItem, setNewsItem] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [attemptCount, setAttemptCount] = useState(0); // Keep track of attempt counts
 
   useEffect(() => {
-    // Check if the news item exists in the context
     const item = newsArray.find(news => news.id === id);
     if (item) {
       setNewsItem(item);
       setLoading(false);
     } else {
-      // Fetch from Firebase
       fetchNewsFromFirebase(id);
     }
   }, [id, newsArray]);
 
-  const fetchNewsFromFirebase = async (newsId) => {
-    setLoading(true); // Show loading state
-  
-    try {
-      const docRef = doc(db, 'news', newsId); // Get a reference to the document
-      const docSnap = await getDoc(docRef); // Attempt to fetch the document
-  
-      if (docSnap.exists()) {
-        setNewsItem({ id: docSnap.id, ...docSnap.data() }); // If the document exists, update the state
-      } else {
-        console.log("No such document!");
-        setNewsItem(null); // If no document is found, set newsItem to null
+  const fetchNewsFromFirebase = async (newsId, attempts = 3) => {
+    setLoading(true);
+    let attempt = 0; // Local attempt counter
+
+    while (attempt < attempts) {
+      try {
+        const docRef = doc(db, 'news', newsId);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setNewsItem({ id: docSnap.id, ...docSnap.data() });
+          setLoading(false);
+          return; // Exit the function if news is found
+        } else {
+          console.log("No such document!");
+          attempt++; // Increment attempt counter if document not found
+          setAttemptCount(attempt); // Update attempt count state
+        }
+      } catch (error) {
+        console.error("Error getting document:", error);
+        attempt++; // Increment attempt counter if an error occurs
+        setAttemptCount(attempt); // Update attempt count state
       }
-    } catch (error) {
-      console.error("Error getting document:", error); // Log any errors
-      setNewsItem(null); // Ensure newsItem is set to null on error
+
+      if (attempt < attempts) {
+        await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1000ms before next attempt
+      }
     }
-  
-    setLoading(false); // Hide loading state
+
+    // After all attempts
+    if (attempt >= attempts) {
+      setNewsItem(null);
+      setLoading(false);
+    }
   };
-  
 
   if (loading) {
     return <div>Loading...</div>;
   }
 
   if (!newsItem) {
-    return <div style={{fontSize:'20px'}}><br /><br />News not found 😞<br /><br /></div>;
+    return <div style={{ fontSize: '20px' }}><br /><br />News not found 😞<br /><br /></div>;
   }
+
+  
 
   //Calculating Date from timestamp
   function formatTimestamp(timestamp) {
