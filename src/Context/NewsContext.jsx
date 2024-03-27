@@ -9,10 +9,17 @@ export const NewsContext = createContext();
 export const NewsProvider = ({ children }) => {
   const [news, setNews] = useState([]);
   const [attempt, setAttempt] = useState(0); // Add state to track fetch attempts
+  const [timeoutId, setTimeoutId] = useState(null); // State to store timeout ID
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
+        // Check if there is cached news data available
+        const cachedNews = JSON.parse(localStorage.getItem('cachedNews'));
+        if (cachedNews) {
+          setNews(cachedNews);
+        }
+
         // Query to fetch the last 15 news items, ordered by their timestamp in descending order
         const newsRef = collection(db, 'news');
         const q = query(newsRef, orderBy('timestamp', 'desc'), limit(15));
@@ -23,14 +30,20 @@ export const NewsProvider = ({ children }) => {
           newsItems.push({ id: doc.id, ...doc.data() });
         });
 
+        // Update state with fetched news items
         setNews(newsItems);
+
+        // Cache the fetched news data in local storage
+        localStorage.setItem('cachedNews', JSON.stringify(newsItems));
+
         console.log(newsItems);
         
         if (newsItems.length === 0 && attempt < 3) { // Limit the number of attempts to avoid infinite loops
-          setTimeout(() => {
+          const id = setTimeout(() => {
             console.log(`Attempt ${attempt + 1}: No news found, retrying...`);
             setAttempt(attempt + 1);
           }, 1000); // Wait for 1000ms before retrying
+          setTimeoutId(id); // Store the timeout ID
         } else if (attempt >= 3) {
           console.error("Failed to fetch news after multiple attempts.");
         }
@@ -44,9 +57,7 @@ export const NewsProvider = ({ children }) => {
 
     // Cleanup function to clear the timeout
     return () => {
-      if (attempt < 3) {
-        clearTimeout();
-      }
+      clearTimeout(timeoutId); // Clear the timeout
     };
   }, [attempt]); // Rerun effect when `attempt` changes, up to the limit set
 
