@@ -29,13 +29,16 @@ export const NewsProvider = ({ children }) => {
         querySnapshot.forEach((doc) => {
           newsItems.push({ id: doc.id, ...doc.data() });
         });
-    
+        
+        console.log(newsItems);
+
         if (newsItems.length > 0) {
           // Update state with fetched news items
           setNews(newsItems);
     
           // Cache the fetched news data in local storage
           localStorage.setItem('cachedNews', JSON.stringify(newsItems));
+          console.log('latest news added to cache successfully');
         } else {
           console.log('No news found in the latest fetch.');
         }
@@ -51,7 +54,7 @@ export const NewsProvider = ({ children }) => {
         }
     
       } catch (error) {
-        console.error("An error occurred while fetching news:", error);
+        console.error("failed to fetch news from backend despite muliple attempts", error);
       }
     };
     

@@ -12,7 +12,7 @@ import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Link, useNavigate } from 'react-router-dom';
-import reach from '../Assets/reach.PNG';
+import reach from '../Assets/reach.jpg';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -22,7 +22,18 @@ import ListItemText from '@mui/material/ListItemText';
 const isAuthenticated = () => false;
 const getUserProfile = () => ({ name: "John Doe", profilePic: "" });
 
-const pages = ['Home', 'Events', 'Sports', 'Auto', 'Tech'];
+const pages = [{ english: 'home', malayalam: 'ഹോം' },
+{ english: 'kerala', malayalam: 'കേരളം' },
+{ english: 'national', malayalam: 'രാജ്യം' },
+{ english: 'world', malayalam: 'ലോകം' },
+{ english: 'cinema', malayalam: 'സിനിമ' },
+{english: 'sports', malayalam: 'കായികം'},
+{ english: 'lifestyle', malayalam: 'ലൈഫ് സ്റ്റൈൽ' },
+{ english: 'business', malayalam: 'ബിസിനസ്സ്' },
+{ english: 'astrology', malayalam: 'ജ്യോതിഷം' },
+{ english: 'auto', malayalam: 'വാഹനം' },
+{english: 'analysis', malayalam: 'വിശകലനം'}, 
+{english: 'crime', malayalam: 'ക്രൈം'}];
 const settings = isAuthenticated() ? ['Profile', 'Account', 'Dashboard', 'Logout'] : ['Login'];
 
 function Navbar() {
@@ -47,9 +58,9 @@ function Navbar() {
       </Typography>
       <List>
         {pages.map((page) => (
-          <ListItem key={page} disablePadding>
-            <ListItemButton onClick={() => navigate(`/${page}`)}>
-              <ListItemText primary={page} />
+          <ListItem key={page.english} disablePadding>
+            <ListItemButton onClick={() => navigate(`/${page.english}`)}>
+              <ListItemText primary={page.malayalam} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -97,11 +108,11 @@ function Navbar() {
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={() => navigate(`/${page}`)}
+                key={page.english}
+                onClick={() => navigate(`/${page.english}`)}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {page.malayalam}
               </Button>
             ))}
           </Box>

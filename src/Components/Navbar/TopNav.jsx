@@ -61,7 +61,7 @@ export default function TopNav() {
   return (
     <Box sx={{ flexGrow: 1 }} >
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar sx={{justifyContent:'space-between'}}>
           <Link to='https://youtube.com/@ReachMalayalam?si=WPs_Yf-j2thMGZet' style={{textDecoration:'none', color:'inherit'}}>
           <IconButton
             size="large"
