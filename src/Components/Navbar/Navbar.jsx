@@ -17,6 +17,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
+import {useAuth} from '../../Context/AuthContext'
+
+
 
 // Mock functions and data
 const isAuthenticated = () => false;
@@ -85,10 +88,13 @@ function Navbar() {
     </Box>
   );
 
+const { currentUser } = useAuth();
+console.log(currentUser)
+
   return (
     <AppBar sx={{ bgcolor: '#181818' }} position="sticky">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters >
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -99,7 +105,7 @@ function Navbar() {
             <MenuIcon />
           </IconButton>
           {/* Logo/Image Box */}
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-start' }}>
+          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' }, }}>
             <Link to="/">
               <img src={reach} alt="Logo" style={{ maxHeight: '50px' }} />
             </Link>
