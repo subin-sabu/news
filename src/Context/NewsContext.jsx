@@ -19,7 +19,7 @@ export const NewsProvider = ({ children }) => {
         if (cachedNews) {
           setNews(cachedNews);
         }
-
+    
         // Query to fetch the last 15 news items, ordered by their timestamp in descending order
         const newsRef = collection(db, 'news');
         const q = query(newsRef, orderBy('timestamp', 'desc'), limit(15));
@@ -29,15 +29,17 @@ export const NewsProvider = ({ children }) => {
         querySnapshot.forEach((doc) => {
           newsItems.push({ id: doc.id, ...doc.data() });
         });
-
-        // Update state with fetched news items
-        setNews(newsItems);
-
-        // Cache the fetched news data in local storage
-        localStorage.setItem('cachedNews', JSON.stringify(newsItems));
-
-        console.log(newsItems);
-        
+    
+        if (newsItems.length > 0) {
+          // Update state with fetched news items
+          setNews(newsItems);
+    
+          // Cache the fetched news data in local storage
+          localStorage.setItem('cachedNews', JSON.stringify(newsItems));
+        } else {
+          console.log('No news found in the latest fetch.');
+        }
+    
         if (newsItems.length === 0 && attempt < 3) { // Limit the number of attempts to avoid infinite loops
           const id = setTimeout(() => {
             console.log(`Attempt ${attempt + 1}: No news found, retrying...`);
@@ -47,11 +49,12 @@ export const NewsProvider = ({ children }) => {
         } else if (attempt >= 3) {
           console.error("Failed to fetch news after multiple attempts.");
         }
-
+    
       } catch (error) {
         console.error("An error occurred while fetching news:", error);
       }
     };
+    
 
     fetchNews();
 
