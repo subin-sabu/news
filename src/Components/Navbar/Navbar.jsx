@@ -27,13 +27,13 @@ const pages = [{ english: 'home', malayalam: 'ഹോം' },
 { english: 'national', malayalam: 'രാജ്യം' },
 { english: 'world', malayalam: 'ലോകം' },
 { english: 'cinema', malayalam: 'സിനിമ' },
-{english: 'sports', malayalam: 'കായികം'},
+{ english: 'sports', malayalam: 'കായികം' },
 { english: 'lifestyle', malayalam: 'ലൈഫ് സ്റ്റൈൽ' },
 { english: 'business', malayalam: 'ബിസിനസ്സ്' },
 { english: 'astrology', malayalam: 'ജ്യോതിഷം' },
 { english: 'auto', malayalam: 'വാഹനം' },
-{english: 'analysis', malayalam: 'വിശകലനം'}, 
-{english: 'crime', malayalam: 'ക്രൈം'}];
+{ english: 'analysis', malayalam: 'വിശകലനം' },
+{ english: 'crime', malayalam: 'ക്രൈം' }];
 const settings = isAuthenticated() ? ['Profile', 'Account', 'Dashboard', 'Logout'] : ['Login'];
 
 function Navbar() {
@@ -105,12 +105,21 @@ function Navbar() {
             </Link>
           </Box>
           {/* Navigation Links for Larger Screens */}
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
-            {pages.map((page) => (
+          <Box sx={{
+            flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'flex-start', overflowX: 'auto', whiteSpace: 'nowrap', 
+            WebkitOverflowScrolling: 'touch',
+            '-ms-overflow-style': 'none',
+            scrollbarWidth: 'none',
+          }}>
+            {pages.map((page, index) => (
               <Button
                 key={page.english}
                 onClick={() => navigate(`/${page.english}`)}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{
+                  my: 2, color: 'white', display: 'inline-block', flexShrink:'0',
+                  // Preserve original spacing between nav items
+                  marginLeft: index !== 0 ? '5px' : null,
+                }}
               >
                 {page.malayalam}
               </Button>
